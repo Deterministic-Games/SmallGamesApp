@@ -37,5 +37,11 @@ namespace MainMenu
             Application.Current.MainWindow.Show();
             Close();
         }
+
+        private void GamesScrollViewer_MouseWheelOver(object sender, MouseWheelEventArgs e)
+        {
+            var scrollviewer = (ScrollViewer)sender;
+            scrollviewer.ScrollToHorizontalOffset(scrollviewer.HorizontalOffset - e.Delta);
+        }
     }
 }

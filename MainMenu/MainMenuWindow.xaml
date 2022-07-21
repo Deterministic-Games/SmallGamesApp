@@ -6,6 +6,15 @@
         xmlns:local="clr-namespace:MainMenu"
         mc:Ignorable="d"
         Title="MainMenuWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="MinWidth" Value="240"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -15,9 +24,29 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Tic Tac Toe" Click="TicTacToe_Click"/>
+        <Label Grid.Column="1" Grid.Row="1" Content="Main Menu"
+               FontSize="100" FontWeight="Bold"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Background="Yellow"/>
+
+        <!--#region Games scrollviewer -->
+        <ScrollViewer Grid.Column="1" Grid.Row="2" CanContentScroll="True" 
+                      VerticalScrollBarVisibility="Disabled" 
+                      HorizontalScrollBarVisibility="Auto" 
+                      PreviewMouseWheel="GamesScrollViewer_MouseWheelOver">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Tic Tac Toe" Background="MediumSeaGreen"/>
+                <Button Content="Connect 4"/>
+                <Button Content="Pong"/>
+                <Button Content="Snake"/>
+                <Button Content="Minesweeper"/>
+            </StackPanel>
+        </ScrollViewer>
+        <!--#endregion-->
     </Grid>
 </Window>
