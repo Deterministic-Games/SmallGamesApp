@@ -44,7 +44,7 @@
         <!--#endregion-->
         
         <!--#region Games scrollviewer -->
-        <local:GamesScrollViewer Grid.Column="1" Grid.Row="2" CanContentScroll="False" 
+        <ScrollViewer Grid.Column="1" Grid.Row="2" CanContentScroll="False" 
                       VerticalScrollBarVisibility="Disabled" 
                       HorizontalScrollBarVisibility="Hidden" 
                       PreviewMouseWheel="GamesScrollViewer_MouseWheelOver" 
@@ -59,7 +59,7 @@
                 <Button Content="Snake"/>
                 <Button Content="Minesweeper"/>
             </StackPanel>
-        </local:GamesScrollViewer>
+        </ScrollViewer>
         <!--#endregion-->
     </Grid>
 </Window>
