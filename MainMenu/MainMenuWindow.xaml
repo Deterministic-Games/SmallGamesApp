@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainMenu"
         mc:Ignorable="d"
-        Title="MainMenuWindow" Height="450" Width="800">
+        Title="Deterministic Games" Height="450" Width="800">
+
+    <!--#region Resources -->
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="MinWidth" Value="240"/>
@@ -15,7 +17,11 @@
             <Setter Property="Background" Value="White"/>
         </Style>
     </Window.Resources>
+    <!--#endregion-->
+    
+    
     <Grid>
+        <!--#region Definitions -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -27,26 +33,33 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <!--#endregion-->
 
+        <!--#region Title -->
         <Label Grid.Column="1" Grid.Row="1" Content="Main Menu"
                FontSize="100" FontWeight="Bold"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"
                Background="Yellow"/>
-
+        <!--#endregion-->
+        
         <!--#region Games scrollviewer -->
-        <ScrollViewer Grid.Column="1" Grid.Row="2" CanContentScroll="True" 
+        <local:GamesScrollViewer Grid.Column="1" Grid.Row="2" CanContentScroll="False" 
                       VerticalScrollBarVisibility="Disabled" 
-                      HorizontalScrollBarVisibility="Auto" 
-                      PreviewMouseWheel="GamesScrollViewer_MouseWheelOver">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Tic Tac Toe" Background="MediumSeaGreen"/>
+                      HorizontalScrollBarVisibility="Hidden" 
+                      PreviewMouseWheel="GamesScrollViewer_MouseWheelOver" 
+                      Loaded="GamesScrollViewer_Loaded"
+                      MouseLeave="GamesScrollViewer_MouseLeave" 
+                      MouseEnter="GamesScrollViewer_MouseEnter"
+                      x:Name="GamesScrollViewer">
+            <StackPanel Orientation="Horizontal" x:Name="GamesStackPanel">
+                <Button Content="Tic Tac Toe" Background="MediumSeaGreen" Click="TicTacToe_Click"/>
                 <Button Content="Connect 4"/>
                 <Button Content="Pong"/>
                 <Button Content="Snake"/>
                 <Button Content="Minesweeper"/>
             </StackPanel>
-        </ScrollViewer>
+        </local:GamesScrollViewer>
         <!--#endregion-->
     </Grid>
 </Window>
