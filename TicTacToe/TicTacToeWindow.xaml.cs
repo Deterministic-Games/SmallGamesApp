@@ -19,17 +19,36 @@ namespace TicTacToe
     /// </summary>
     public partial class TicTacToeWindow : Window
     {
-        public TicTacToe Game { get; private set; } = new();
+        private Window _parent;
 
-        public TicTacToeWindow()
+        private TicTacToe _currentState = new();
+        public TicTacToe Game 
+        { 
+            get { return _currentState; }
+            private set
+            {
+                _currentState = value;
+                DataContext = value;
+            }
+        }
+
+        public TicTacToeWindow(Window parent)
         {
             InitializeComponent();
-            DataContext = Game;
+            DataContext = _currentState;
+            _parent = parent;
         }
 
         private void TicTacToeSquare_Click(object sender, RoutedEventArgs e)
         {
             Game.CurrentTurn++;
+        }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = _parent;
+            Application.Current.MainWindow.Show();
+            Close();
         }
     }
 }
