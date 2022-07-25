@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TicTacToe.Models;
 
 namespace TicTacToe
 {
@@ -39,6 +40,8 @@ namespace TicTacToe
 
         private void TicTacToeSquare_Click(object sender, RoutedEventArgs e)
         {
+            var square = (Button)sender;
+            CurrentState.Squares[0, 0].Player = CurrentState.CurrentPlayer;
             CurrentState.CurrentTurn++;
         }
 
