@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace TicTacToe
 {
-    public class TicTacToe : ICloneable, INotifyPropertyChanged
+    public class TicTacToeModel : ICloneable, INotifyPropertyChanged
     {
         private uint _currentTurn;
         public uint CurrentTurn
@@ -56,7 +56,7 @@ namespace TicTacToe
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public TicTacToe() { }
+        public TicTacToeModel() { }
 
         public bool HasWon(bool playerX)
         {
@@ -65,7 +65,7 @@ namespace TicTacToe
 
         public object Clone()
         {
-            return new TicTacToe();
+            return new TicTacToeModel();
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -77,7 +77,7 @@ namespace TicTacToe
         {
             public bool IsEmpty { get; set; }
             public bool IsWinningSquare { get; set; }
-            public Player Player { get; set; }
+            public Player? Player { get; set; }
 
         }
 
