@@ -19,8 +19,8 @@ namespace TicTacToe
     /// </summary>
     public partial class TicTacToeWindow : Window
     {
-        private TicTacToe _currentState = new();
-        public TicTacToe CurrentState 
+        private TicTacToeModel _currentState = new();
+        public TicTacToeModel CurrentState 
         { 
             get { return _currentState; }
             private set
@@ -57,6 +57,11 @@ namespace TicTacToe
         private void UndoButton_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Application.Current.MainWindow != Owner) Owner.Close();
         }
     }
 }
