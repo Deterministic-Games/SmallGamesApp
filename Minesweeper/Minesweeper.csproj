@@ -7,9 +7,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Minesweeper\Minesweeper.csproj" />
-    <ProjectReference Include="..\TicTacToe\TicTacToe.csproj" />
-  </ItemGroup>
-
 </Project>

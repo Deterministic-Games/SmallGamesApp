@@ -13,9 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Diagnostics;
 
 using TicTacToe;
-using System.Diagnostics;
+using Minesweeper;
 
 namespace MainMenu
 {
@@ -35,6 +36,11 @@ namespace MainMenu
         private void TicTacToe_Click(object sender, RoutedEventArgs e)
         {
             SwitchWindow(new TicTacToeWindow(this));
+        }
+
+        private void Minesweeper_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchWindow(new MinesweeperWindow(this));
         }
 
         private void SwitchWindow(Window window)

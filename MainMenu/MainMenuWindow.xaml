@@ -54,10 +54,10 @@
                       x:Name="GamesScrollViewer">
             <StackPanel Orientation="Horizontal" x:Name="GamesStackPanel">
                 <Button Content="Tic Tac Toe" Background="MediumSeaGreen" Click="TicTacToe_Click"/>
+                <Button Content="Minesweeper" Background="MediumSeaGreen" Click="Minesweeper_Click"/>
                 <Button Content="Connect 4"/>
                 <Button Content="Pong"/>
                 <Button Content="Snake"/>
-                <Button Content="Minesweeper"/>
             </StackPanel>
         </ScrollViewer>
         <!--#endregion-->
