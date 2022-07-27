@@ -147,6 +147,7 @@ namespace TicTacToe
         {
             GameModel = new();
             GameGrid.IsHitTestVisible = true;
+            WinLabel.Content = null;
             GameModel.States.Add((Square[])GameModel.Squares.Clone());
         }
 
