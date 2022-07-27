@@ -4,11 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToe"
-        xmlns:models="clr-namespace:TicTacToe.Models" xmlns:system="clr-namespace:System;assembly=netstandard" d:DataContext="{d:DesignInstance Type=models:TicTacToeModel}"
+        xmlns:models="clr-namespace:TicTacToe.Models" d:DataContext="{d:DesignInstance Type=models:TicTacToeModel}"
         mc:Ignorable="d"
         Title="Deterministic Games: Tic Tac Toe" Height="450" Width="800" Closing="Window_Closing">
     <Window.Resources>
-        <local:TicTacToeValueConverter x:Key="valueConverter"/>
         <!--#region Button styles -->
         <Style TargetType="Button" x:Name="ButtonStyle">
             <Setter Property="FontWeight" Value="Bold"/>
@@ -28,7 +27,7 @@
         <Style TargetType="Label" x:Name="LabelStyle">
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="36"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <!--#endregion-->
     </Window.Resources>
@@ -76,19 +75,25 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Undo" Style="{StaticResource MenuButton}" 
-                    IsEnabled="{Binding CanUndo}"/>
-            <Button Grid.Column="1" Content="Menu" Style="{StaticResource MenuButton}" 
+            <Button Grid.Column="0" Content="Menu" Style="{StaticResource MenuButton}" 
                     Background="Yellow" Click="MenuButton_Click"/>
-            <Button Grid.Column="2" Content="Redo" Style="{StaticResource MenuButton}" 
-                    IsEnabled="{Binding CanRedo}"/>
+            <Button Grid.Column="1" Content="Restart" Style="{StaticResource MenuButton}"
+                    Background="MediumSeaGreen" Click="RestartButton_Click"/>
+
+            <Button Grid.Column="2" Content="Undo" Style="{StaticResource MenuButton}" 
+                    Background="OrangeRed" IsEnabled="{Binding CanUndo}"
+                    Click="UndoButton_Click"/>
+            <Button Grid.Column="3" Content="Redo" Style="{StaticResource MenuButton}" 
+                    Background="CornflowerBlue" IsEnabled="{Binding CanRedo}"
+                    Click="RedoButton_Click"/>
         </Grid>
         <!--#endregion-->
 
         <!--#region Game -->
-        <Grid Grid.Column="1" Grid.Row="2">
+        <Grid Grid.Column="1" Grid.Row="2" x:Name="GameGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -102,28 +107,61 @@
 
             <!-- Row 1 -->
             <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[0].Player}" Tag="0"
+                    Foreground="{Binding Squares[0].Color}"
+                    IsHitTestVisible="{Binding Squares[0].IsEmpty}"/>
             <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[1].Player}" Tag="1"
+                    Foreground="{Binding Squares[1].Color}"
+                    IsHitTestVisible="{Binding Squares[1].IsEmpty}"/>
             <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[2].Player}" Tag="2"
+                    Foreground="{Binding Squares[2].Color}"
+                    IsHitTestVisible="{Binding Squares[2].IsEmpty}"/>
 
             <!-- Row 2 -->
             <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[3].Player}" Tag="3"
+                    Foreground="{Binding Squares[3].Color}"
+                    IsHitTestVisible="{Binding Squares[3].IsEmpty}"/>
             <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[4].Player}" Tag="4"
+                    Foreground="{Binding Squares[4].Color}"
+                    IsHitTestVisible="{Binding Squares[4].IsEmpty}"/>
             <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[5].Player}" Tag="5"
+                    Foreground="{Binding Squares[5].Color}"
+                    IsHitTestVisible="{Binding Squares[5].IsEmpty}"/>
 
             <!-- Row 3 -->
             <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[6].Player}" Tag="6"
+                    Foreground="{Binding Squares[6].Color}"
+                    IsHitTestVisible="{Binding Squares[6].IsEmpty}"/>
             <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[7].Player}" Tag="7"
+                    Foreground="{Binding Squares[7].Color}"
+                    IsHitTestVisible="{Binding Squares[7].IsEmpty}"/>
             <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource SquareButton}" 
-                    Click="TicTacToeSquare_Click"/>
+                    Click="TicTacToeSquare_Click" 
+                    Content="{Binding Squares[8].Player}" Tag="8"
+                    Foreground="{Binding Squares[8].Color}"
+                    IsHitTestVisible="{Binding Squares[8].IsEmpty}"/>
         </Grid>
         <!--#endregion-->
+
+        <!-- Win label -->
+        <Label Grid.Column="1" Grid.Row="2" x:Name="WinLabel"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Top"
+               IsHitTestVisible="False" FontWeight="Normal"/>
     </Grid>
 </Window>
