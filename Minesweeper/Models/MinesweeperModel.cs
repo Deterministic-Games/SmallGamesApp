@@ -27,7 +27,7 @@ namespace Minesweeper.Models
             {
                 var index = Random.Shared.Next(Board.Length);
                 while (Board[index].HasMine) index = Random.Shared.Next(Board.Length);
-                Board[index] = true;
+                Board[index].HasMine = true;
             }
         }
     }
