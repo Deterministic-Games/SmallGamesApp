@@ -4,31 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Minesweeper.Models
+namespace Minesweeper.Models;
+
+public class MinesweeperModel
 {
-    public class MinesweeperModel
+    // Bitmapped columns, 16 rows, 30 columns. Intermediate difficulty would be 16 columns.
+    public SquareModel[] Board { get; set; } = new SquareModel[16 * 30];
+    public int NumberOfMines { get; set; } = 99;
+
+    public MinesweeperModel() { SpawnMines(); }
+    public MinesweeperModel(int size)
     {
-        // Bitmapped columns, 16 rows, 30 columns. Intermediate difficulty would be 16 columns.
-        public Square[] Board { get; set; } = new Square[16 * 30];
-        public int NumberOfMines { get; set; } = 99;
+        Board = new SquareModel[size];
+        SpawnMines();
+    }
 
-        public MinesweeperModel() { SpawnMines(); }
-        public MinesweeperModel(int size)
+    public void SpawnMines()
+    {
+        Board.Initialize();
+
+        for (int i = 0; i < NumberOfMines; i++)
         {
-            Board = new Square[size];
-            SpawnMines();
-        }
-
-        public void SpawnMines()
-        {
-            Board.Initialize();
-
-            for (int i = 0; i < NumberOfMines; i++)
-            {
-                var index = Random.Shared.Next(Board.Length);
-                while (Board[index].HasMine) index = Random.Shared.Next(Board.Length);
-                Board[index].HasMine = true;
-            }
+            var index = Random.Shared.Next(Board.Length);
+            while (Board[index].HasMine) index = Random.Shared.Next(Board.Length);
+            Board[index].HasMine = true;
         }
     }
 }

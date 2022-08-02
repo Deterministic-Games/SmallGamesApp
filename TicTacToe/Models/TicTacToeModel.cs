@@ -8,77 +8,76 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace TicTacToe.Models
+namespace TicTacToe.Models;
+
+public class TicTacToeModel : INotifyPropertyChanged
 {
-    public class TicTacToeModel : INotifyPropertyChanged
+    private int _currentTurn = 1;
+    public int CurrentTurn
     {
-        private int _currentTurn = 1;
-        public int CurrentTurn
+        get { return _currentTurn; }
+        set
         {
-            get { return _currentTurn; }
-            set
-            {
-                if (value < 1) return;
+            if (value < 1) return;
 
-                _currentTurn = value;
+            _currentTurn = value;
 
-                CurrentPlayer = value % 2 != 0 ? Player.X : Player.O;
+            CurrentPlayer = value % 2 != 0 ? Player.X : Player.O;
 
-                CanUndo = value > 1;
-                CanRedo = value < States.Count;
+            CanUndo = value > 1;
+            CanRedo = value < States.Count;
 
-                OnPropertyChanged();
-            }
+            OnPropertyChanged();
         }
-        private Player _currentPlayer = Player.X;
-        public Player CurrentPlayer
+    }
+    private Player _currentPlayer = Player.X;
+    public Player CurrentPlayer
+    {
+        get { return _currentPlayer; }
+        set
         {
-            get { return _currentPlayer; }
-            set
-            {
-                _currentPlayer = value;
-                OnPropertyChanged();
-            }
+            _currentPlayer = value;
+            OnPropertyChanged();
         }
-        private bool _canUndo = false;
-        public bool CanUndo
+    }
+    private bool _canUndo = false;
+    public bool CanUndo
+    {
+        get { return _canUndo; }
+        set
         {
-            get { return _canUndo; }
-            set
-            {
-                _canUndo = value;
-                OnPropertyChanged();
-            }
+            _canUndo = value;
+            OnPropertyChanged();
         }
-        private bool _canRedo = false;
-        public bool CanRedo
+    }
+    private bool _canRedo = false;
+    public bool CanRedo
+    {
+        get { return _canRedo; }
+        set
         {
-            get { return _canRedo; }
-            set
-            {
-                _canRedo = value;
-                OnPropertyChanged();
-            }
+            _canRedo = value;
+            OnPropertyChanged();
         }
+    }
 
-        private Square[] _squares = new Square[9];
-        public Square[] Squares 
-        { 
-            get { return _squares; } 
-            set
-            {
-                _squares = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public List<Square[]> States { get; set; } = new();
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        internal void OnPropertyChanged([CallerMemberName] string? name = null)
+    private Square[] _squares = new Square[9];
+    public Square[] Squares 
+    { 
+        get { return _squares; } 
+        set
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            _squares = value;
+            OnPropertyChanged();
         }
+    }
+
+    public List<Square[]> States { get; set; } = new();
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    internal void OnPropertyChanged([CallerMemberName] string? name = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

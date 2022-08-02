@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToe.Models;
+namespace Minesweeper.ViewModels;
 
-public enum Player
+public class SquareViewModel
 {
-    X,
-    O
 }

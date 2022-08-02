@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToe.Models;
+namespace TicTacToe.ViewModels;
 
-public enum Player
+public class TicTacToeViewModel
 {
-    X,
-    O
+
 }
