@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:Minesweeper">
 
 
+    <!--
     <Style TargetType="{x:Type local:CustomControl1}">
         <Setter Property="Template">
             <Setter.Value>
@@ -16,4 +17,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+    -->
 </ResourceDictionary>

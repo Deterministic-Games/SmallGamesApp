@@ -8,4 +8,5 @@
         xmlns:controls="clr-namespace:Minesweeper.Controls"
         mc:Ignorable="d"
         Title="MinesweeperWindow" Height="450" Width="800">
+    <controls:GameGridControl NumberOfColumns="16" NumberOfRows="16"/>
 </Window>
