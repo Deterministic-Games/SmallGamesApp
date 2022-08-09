@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainMenu", "MainMenu\MainMe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe", "TicTacToe\TicTacToe.csproj", "{4EF89820-98FB-499E-83B2-37F4844DE695}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper", "Minesweeper\Minesweeper.csproj", "{84D70E56-7A20-4818-B408-34FCB4C72143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minesweeper", "Minesweeper\Minesweeper.csproj", "{84D70E56-7A20-4818-B408-34FCB4C72143}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox", "Toolbox\Toolbox.csproj", "{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{84D70E56-7A20-4818-B408-34FCB4C72143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84D70E56-7A20-4818-B408-34FCB4C72143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84D70E56-7A20-4818-B408-34FCB4C72143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

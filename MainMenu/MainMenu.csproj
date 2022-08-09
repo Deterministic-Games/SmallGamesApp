@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Minesweeper\Minesweeper.csproj" />
     <ProjectReference Include="..\TicTacToe\TicTacToe.csproj" />
+    <ProjectReference Include="..\Toolbox\Toolbox.csproj" />
   </ItemGroup>
 
 </Project>
