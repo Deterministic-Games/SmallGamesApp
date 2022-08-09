@@ -1,35 +1,85 @@
 ﻿using System.Windows.Input;
-using Minesweeper.Commands;
 using Minesweeper.Models;
+using Toolbox;
 
 namespace Minesweeper.ViewModels;
 
-public class SquareViewModel
+public class SquareViewModel : BaseViewModel
 {
-    public SquareModel Square { get; init; }
+    #region Wrapper
+    private SquareModel _square;
 
+    public bool HasMine
+    {
+        get { return _square.HasMine; }
+        set
+        {
+            _square.HasMine = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool IsFlagged
+    {
+        get { return _square.IsFlagged; }
+        set
+        {
+            _square.IsFlagged = value;
+            OnPropertyChanged();
+        }
+    }
+    public bool IsOpened
+    {
+        get { return _square.IsOpened; }
+        set
+        {
+            if (IsOpened) return;
+
+            _square.IsOpened = value;
+            OnPropertyChanged();
+        }
+    }
+    public byte NeighbourMineCount
+    {
+        get { return _square.NeighbourMineCount; }
+        set
+        {
+            _square.NeighbourMineCount = value;
+            OnPropertyChanged();
+        }
+    }
+    #endregion
+
+    #region Commands
     public ICommand OpenCommand { get; init; }
     public ICommand FlagCommand { get; init; }
+    #endregion
 
-    public bool CanOpen => !(Square.IsOpened || Square.IsFlagged);
-    public bool CanFlag => !Square.IsOpened;
+    public bool CanOpen => !(IsOpened || IsFlagged);
+    public bool CanFlag => !IsOpened;
+
+    public SquareViewModel(SquareModel square)
+    {
+        _square = square;
+        OpenCommand = new RelayCommand(Open, () => CanOpen);
+        FlagCommand = new RelayCommand(ToggleFlag, () => CanFlag);
+    }
 
     public SquareViewModel()
     {
-        Square = new SquareModel();
-        OpenCommand = new OpenSquareCommand(this);
-        FlagCommand = new FlagSquareCommand(this);
+        _square = new SquareModel();
+        OpenCommand = new RelayCommand(Open, () => CanOpen);
+        FlagCommand = new RelayCommand(ToggleFlag, () => CanFlag);
     }
 
     public void Open()
     {
-        Square.IsOpened = true;
-        Square.NeighbourMineCount = 6;
+        IsOpened = true;
+        NeighbourMineCount = 6;
     }
 
     public void ToggleFlag()
     {
-        Square.IsFlagged = !Square.IsFlagged;
-        Square.NeighbourMineCount = 1;
+        IsFlagged = !IsFlagged;
+        NeighbourMineCount = 1;
     }
 }
