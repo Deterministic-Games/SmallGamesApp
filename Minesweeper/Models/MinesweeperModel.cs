@@ -8,26 +8,70 @@ namespace Minesweeper.Models;
 
 public class MinesweeperModel
 {
-    // Bitmapped columns, 16 rows, 30 columns. Intermediate difficulty would be 16 columns.
-    public SquareModel[] Board { get; set; } = new SquareModel[16 * 30];
-    public int NumberOfMines { get; set; } = 99;
+    private List<SquareModel> _squares = new();
 
-    public MinesweeperModel() { SpawnMines(); }
-    public MinesweeperModel(int size)
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public int Mines { get; set; }
+
+    public MinesweeperModel(MinesweeperSize size)
     {
-        Board = new SquareModel[size];
-        SpawnMines();
+        Initialize(size);
     }
 
-    public void SpawnMines()
+    public MinesweeperModel() 
     {
-        Board.Initialize();
+        Initialize(MinesweeperSize.Medium);
+    }
 
-        for (int i = 0; i < NumberOfMines; i++)
+    private void Initialize(MinesweeperSize size)
+    {
+        switch (size)
         {
-            var index = Random.Shared.Next(Board.Length);
-            while (Board[index].HasMine) index = Random.Shared.Next(Board.Length);
-            Board[index].HasMine = true;
+            case MinesweeperSize.Small:
+                Height = 9;
+                Width = 9;
+                Mines = 10;
+                break;
+            case MinesweeperSize.Medium:
+                Height = 16;
+                Width = 16;
+                Mines = 40;
+                break;
+            case MinesweeperSize.Large:
+                Height = 16;
+                Width = 32;
+                Mines = 99;
+                break;
+            default:
+                break;
+        }
+        AddSquares();
+        LayMines();
+    }
+
+    private void AddSquares()
+    {
+        for (int i = 0; i < Width * Height; i++)
+        {
+            _squares.Add(SquareModel.CreateSquare());
         }
     }
+
+    private void LayMines()
+    {
+        int bombs = Mines;
+        while (bombs > 0)
+        {
+            var index = Random.Shared.Next(0, _squares.Count);
+
+            if (!_squares[index].HasMine)
+            {
+                _squares[index].HasMine = true;
+                bombs--;
+            }
+        }
+    }
+
+    public List<SquareModel> GetSquares() => _squares;
 }
