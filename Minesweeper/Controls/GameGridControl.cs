@@ -9,6 +9,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Markup;
+using System.Collections.ObjectModel;
+using Minesweeper.ViewModels;
+using System.Windows.Data;
 
 namespace Minesweeper.Controls;
 
@@ -42,6 +45,8 @@ public class GameGridControl : Grid, INotifyPropertyChanged
             SetupGrid();
         }
     }
+
+    ObservableCollection<SquareViewModel> test = new();
 
     public GameGridControl() : base()
     {
@@ -90,12 +95,24 @@ public class GameGridControl : Grid, INotifyPropertyChanged
 
     void AddSquare(int col, int row)
     {
+        var square = new SquareViewModel();
+        test.Add(square);
+
+        var binding = new Binding("CanOpen")
+        {
+            Source = square
+        };
+
         var button = new SquareControl
         {
             Content = "Hi",
             FontSize = 16,
-            FontWeight = FontWeights.Bold
+            FontWeight = FontWeights.Bold,
+            Command = square.OpenCommand,
+            Command2 = square.FlagCommand
         };
+        button.SetBinding(IsEnabledProperty, binding);
+
         SetColumn(button, col);
         SetRow(button, row);
         Children.Add(button);
