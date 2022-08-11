@@ -18,7 +18,6 @@ namespace Minesweeper.Controls;
 public class GameGridControl : Grid, INotifyPropertyChanged
 {
     [Required]
-    [Range(1, 64, ErrorMessage = "Number of columns must be between {1} and {64}")]
     private int _numberOfColumns = 1;
     public int NumberOfColumns 
     { 
@@ -32,7 +31,6 @@ public class GameGridControl : Grid, INotifyPropertyChanged
         }
     }
     [Required]
-    [Range(1, 64, ErrorMessage = "Number of rows must be between {1} and {64}")]
     private int _numberOfRows = 1;
     public int NumberOfRows 
     { 
