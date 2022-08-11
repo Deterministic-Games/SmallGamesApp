@@ -14,6 +14,7 @@ public class MinesweeperModel
     public int Height { get; set; }
     public int Mines { get; set; }
 
+    #region Constructor
     public MinesweeperModel(MinesweeperSize size)
     {
         Initialize(size);
@@ -23,7 +24,9 @@ public class MinesweeperModel
     {
         Initialize(MinesweeperSize.Medium);
     }
+    #endregion
 
+    #region Initialization
     private void Initialize(MinesweeperSize size)
     {
         switch (size)
@@ -72,6 +75,7 @@ public class MinesweeperModel
             }
         }
     }
+    #endregion
 
     public List<SquareModel> GetSquares() => _squares;
 }
