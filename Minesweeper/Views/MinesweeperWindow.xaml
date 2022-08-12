@@ -6,7 +6,18 @@
         xmlns:root="clr-namespace:Minesweeper"
         xmlns:viewmodels="clr-namespace:Minesweeper.ViewModels"
         xmlns:controls="clr-namespace:Minesweeper.Controls"
+        xmlns:toolbox="clr-namespace:Toolbox;assembly=Toolbox" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperViewModel}"
         mc:Ignorable="d"
-        Title="MinesweeperWindow" Height="450" Width="800">
-    <controls:GameGridControl NumberOfColumns="16" NumberOfRows="16"/>
+        Title="MinesweeperWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Grid>
+        <!--
+        <controls:GameGridControl NumberOfColumns="16" NumberOfRows="16"/>
+       
+        <toolbox:DynamicGridControl ItemsSource="{Binding Squares}"/>
+         -->
+        <DataGrid ItemsSource="{Binding Squares}">
+            
+        </DataGrid>
+    </Grid>
 </Window>
