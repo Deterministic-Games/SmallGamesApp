@@ -12,7 +12,7 @@ namespace Minesweeper
         {
             InitializeComponent();
             Owner = owner;
-            DataContext = new SquareViewModel();
+            DataContext = new MinesweeperViewModel();
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)
@@ -25,6 +25,11 @@ namespace Minesweeper
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Application.Current.MainWindow != Owner) Owner.Close();
         }
     }
 }
