@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using Minesweeper.Models;
 using Toolbox;
@@ -8,7 +10,7 @@ namespace Minesweeper.ViewModels;
 
 public class MinesweeperViewModel : BaseViewModel
 {
-    public ObservableCollection<SquareViewModel> Squares { get; set; } = new();
+    public ObservableCollection<SquareViewModel> Squares { get; set; }
 
     #region Wrapper
     private MinesweeperModel _minesweeperModel = new();
@@ -45,11 +47,16 @@ public class MinesweeperViewModel : BaseViewModel
     public MinesweeperViewModel()
     {
         Squares = new(_minesweeperModel.GetSquares().Select(sqr => new SquareViewModel(sqr)));
-        Squares.CollectionChanged += OnSquaresChanged;
+
+        #if DEBUG
+        Debug.WriteLine(_minesweeperModel.ToString());
+        #endif
+
+        //Squares.CollectionChanged += OnSquaresChanged;
     }
 
-    private void OnSquaresChanged(object? sender, NotifyCollectionChangedEventArgs? e)
+    /*private void OnSquaresChanged(object? sender, NotifyCollectionChangedEventArgs? e)
     {
         OnPropertyChanged("Squares");
-    }
+    }*/
 }
