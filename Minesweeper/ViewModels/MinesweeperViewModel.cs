@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Minesweeper.Models;
@@ -51,12 +49,5 @@ public class MinesweeperViewModel : BaseViewModel
         #if DEBUG
         Debug.WriteLine(_minesweeperModel.ToString());
         #endif
-
-        //Squares.CollectionChanged += OnSquaresChanged;
     }
-
-    /*private void OnSquaresChanged(object? sender, NotifyCollectionChangedEventArgs? e)
-    {
-        OnPropertyChanged("Squares");
-    }*/
 }
