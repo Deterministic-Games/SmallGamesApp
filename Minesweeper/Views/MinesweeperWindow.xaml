@@ -14,7 +14,7 @@
         <toolbox:DynamicGridControl ItemsSource="{Binding Squares}"/>
          -->
         
-        <DataGrid ItemsSource="{Binding Squares}" SelectionUnit="Cell">
+        <DataGrid ItemsSource="{Binding Path=Squares}" SelectionUnit="Cell">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
