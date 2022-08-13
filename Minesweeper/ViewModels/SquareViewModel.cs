@@ -25,6 +25,8 @@ public class SquareViewModel : BaseViewModel
         {
             _square.IsFlagged = value;
             OnPropertyChanged();
+            OnPropertyChanged("CanOpen");
+            OnPropertyChanged("CanFlag");
         }
     }
     public bool IsOpened
@@ -36,6 +38,8 @@ public class SquareViewModel : BaseViewModel
 
             _square.IsOpened = value;
             OnPropertyChanged();
+            OnPropertyChanged("CanOpen");
+            OnPropertyChanged("CanFlag");
         }
     }
     public byte NeighbourMineCount
@@ -57,6 +61,7 @@ public class SquareViewModel : BaseViewModel
     public bool CanOpen => !(IsOpened || IsFlagged);
     public bool CanFlag => !IsOpened;
 
+    #region Constructor
     public SquareViewModel(SquareModel square)
     {
         _square = square;
@@ -70,16 +75,15 @@ public class SquareViewModel : BaseViewModel
         OpenCommand = new RelayCommand(Open, () => CanOpen);
         FlagCommand = new RelayCommand(ToggleFlag, () => CanFlag);
     }
+    #endregion
 
     public void Open()
     {
         IsOpened = true;
-        NeighbourMineCount = 6;
     }
 
     public void ToggleFlag()
     {
         IsFlagged = !IsFlagged;
-        NeighbourMineCount = 1;
     }
 }

@@ -5,19 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:root="clr-namespace:Minesweeper"
         xmlns:viewmodels="clr-namespace:Minesweeper.ViewModels"
-        xmlns:controls="clr-namespace:Minesweeper.Controls"
         xmlns:toolbox="clr-namespace:Toolbox;assembly=Toolbox" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperViewModel}"
         mc:Ignorable="d"
         Title="MinesweeperWindow" Height="450" Width="800" Closing="Window_Closing">
-    <Grid>
+    <StackPanel>
         <!--
-        <controls:GameGridControl NumberOfColumns="16" NumberOfRows="16"/>
-       
         <toolbox:DynamicGridControl ItemsSource="{Binding Squares}"/>
          -->
-        <DataGrid ItemsSource="{Binding Squares}">
-            
+        
+        <DataGrid ItemsSource="{Binding Squares}" SelectionUnit="Cell">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Test button" Width="100" Height="100" VerticalAlignment="Top">
+                                <Button.InputBindings>
+                                    <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
+                                    <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>
+                                </Button.InputBindings>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
         </DataGrid>
-    </Grid>
+    </StackPanel>
 </Window>
