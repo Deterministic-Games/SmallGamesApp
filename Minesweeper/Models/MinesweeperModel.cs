@@ -77,9 +77,6 @@ public class MinesweeperModel
             }
         }
     }
-    #endregion
-
-    public List<SquareModel> GetSquares() => _squares;
 
     public void GetNeighbouringMineCount()
     {
@@ -119,8 +116,11 @@ public class MinesweeperModel
             }
         }
     }
+    #endregion
 
     private SquareModel GetSquare(int row, int col) => _squares[FlattenIndex(row, col)];
+
+    public List<SquareModel> GetSquares() => _squares;
 
     private int FlattenIndex(int row, int col) => (row * Width) + col;
 
