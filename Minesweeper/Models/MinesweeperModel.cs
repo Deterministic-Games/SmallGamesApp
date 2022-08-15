@@ -1,34 +1,144 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Minesweeper.Models
+namespace Minesweeper.Models;
+
+public class MinesweeperModel
 {
-    public class MinesweeperModel
+    private List<SquareModel> _squares = new();
+
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public int Mines { get; set; }
+
+    #region Constructor
+    public MinesweeperModel(MinesweeperSize size)
     {
-        // Bitmapped columns, 16 rows, 30 columns. Intermediate difficulty would be 16 columns.
-        public Square[] Board { get; set; } = new Square[16 * 30];
-        public int NumberOfMines { get; set; } = 99;
+        Initialize(size);
+    }
 
-        public MinesweeperModel() { SpawnMines(); }
-        public MinesweeperModel(int size)
+    public MinesweeperModel() 
+    {
+        Initialize(MinesweeperSize.Medium);
+    }
+    #endregion
+
+    #region Initialization
+    private void Initialize(MinesweeperSize size)
+    {
+        switch (size)
         {
-            Board = new Square[size];
-            SpawnMines();
+            case MinesweeperSize.Small:
+                Height = 9;
+                Width = 9;
+                Mines = 10;
+                break;
+            case MinesweeperSize.Medium:
+                Height = 16;
+                Width = 16;
+                Mines = 40;
+                break;
+            case MinesweeperSize.Large:
+                Height = 16;
+                Width = 32;
+                Mines = 99;
+                break;
+            default:
+                break;
         }
+        AddSquares();
+        LayMines();
+        GetNeighbouringMineCount();
+    }
 
-        public void SpawnMines()
+    private void AddSquares()
+    {
+        for (int i = 0; i < Width * Height; i++)
         {
-            Board.Initialize();
+            _squares.Add(SquareModel.CreateSquare());
+        }
+    }
 
-            for (int i = 0; i < NumberOfMines; i++)
+    private void LayMines()
+    {
+        int bombs = Mines;
+        while (bombs > 0)
+        {
+            var index = Random.Shared.Next(0, _squares.Count);
+
+            if (!_squares[index].HasMine)
             {
-                var index = Random.Shared.Next(Board.Length);
-                while (Board[index].HasMine) index = Random.Shared.Next(Board.Length);
-                Board[index].HasMine = true;
+                _squares[index].HasMine = true;
+                bombs--;
             }
         }
+    }
+
+    public void GetNeighbouringMineCount()
+    {
+        for (int row = 0; row < Height; row++)
+        {
+            for (int col = 0; col < Width; col++)
+            {
+                var square = GetSquare(row, col);
+
+                //if (square.HasMine) continue;
+
+                /*  x x x
+                 *  x s x
+                 *  x x x
+                 */
+                bool colMoreThanMin = col > 1;
+                bool colLessThanMax = col < Width - 1;
+                bool rowMoreThanMin = row > 1;
+                bool rowLessThanMax = row < Height - 1;
+
+                if (colMoreThanMin && GetSquare(row, col - 1).HasMine) square.NeighbourMineCount++;
+
+                if (colLessThanMax && GetSquare(row, col + 1).HasMine) square.NeighbourMineCount++;
+
+                if (colMoreThanMin && rowMoreThanMin && GetSquare(row - 1, col - 1).HasMine) square.NeighbourMineCount++;
+
+                if (colMoreThanMin && rowLessThanMax && GetSquare(row + 1, col - 1).HasMine) square.NeighbourMineCount++;
+
+
+                if (rowMoreThanMin && GetSquare(row - 1, col).HasMine) square.NeighbourMineCount++;
+
+                if (rowLessThanMax && GetSquare(row + 1, col).HasMine) square.NeighbourMineCount++;
+
+                if (colLessThanMax && rowMoreThanMin && GetSquare(row - 1, col + 1).HasMine) square.NeighbourMineCount++;
+
+                if (colLessThanMax && rowLessThanMax && GetSquare(row + 1, col + 1).HasMine) square.NeighbourMineCount++;
+            }
+        }
+    }
+    #endregion
+
+    private SquareModel GetSquare(int row, int col) => _squares[FlattenIndex(row, col)];
+
+    public List<SquareModel> GetSquares() => _squares;
+
+    private int FlattenIndex(int row, int col) => (row * Width) + col;
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+
+        for (int row = 0; row < Height; row++)
+        {
+            for (int col = 0; col < Width; col++)
+            {
+                var square = GetSquare(row, col);
+
+                var content = square.HasMine ? " " : square.NeighbourMineCount.ToString();
+                sb.Append($" {content} ");
+            }
+            sb.Append('\n');
+        }
+        return sb.ToString();
     }
 }

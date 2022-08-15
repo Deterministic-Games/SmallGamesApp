@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToe.Models;
+namespace Minesweeper.Models;
 
-public enum Player
+public enum MinesweeperSize
 {
-    X,
-    O
+    Small,
+    Medium,
+    Large
 }
