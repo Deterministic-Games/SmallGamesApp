@@ -3,32 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Minesweeper.Views"
         xmlns:root="clr-namespace:Minesweeper"
         xmlns:viewmodels="clr-namespace:Minesweeper.ViewModels"
         xmlns:toolbox="clr-namespace:Toolbox;assembly=Toolbox" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperViewModel}"
         mc:Ignorable="d"
-        Title="MinesweeperWindow" Height="450" Width="800" Closing="Window_Closing">
-    <StackPanel>
-        <!--
-        <toolbox:DynamicGridControl ItemsSource="{Binding Squares}"/>
-         -->
-        
-        <DataGrid ItemsSource="{Binding Path=Squares}" SelectionUnit="Cell">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Test button" Width="100" Height="100" VerticalAlignment="Top">
-                                <Button.InputBindings>
-                                    <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
-                                    <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>
-                                </Button.InputBindings>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+        Title="MinesweeperWindow" Height="450" Width="500" Closing="Window_Closing">
+    <Window.Resources>
+        <root:BackgroundConverter x:Key="backgroundconverter"/>
+        <root:ForegroundConverter x:Key="foregroundconverter"/>
+        <root:InverseBoolValueConverter x:Key="boolconverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Background="Beige">
+            <local:MinesweeperView x:Name="MinesweeperView"/>
+        </Border>
+    </Grid>
+
 </Window>

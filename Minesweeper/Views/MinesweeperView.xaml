@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Minesweeper.Views.MinesweeperView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Minesweeper.Views"
+             xmlns:root="clr-namespace:Minesweeper" 
+             xmlns:viewmodels="clr-namespace:Minesweeper.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             MinHeight="1" MinWidth="1">
+    <UserControl.Resources>
+        <root:BackgroundConverter x:Key="backgroundconverter"/>
+        <root:ForegroundConverter x:Key="foregroundconverter"/>
+        <root:InverseBoolValueConverter x:Key="boolconverter"/>
+        <root:RestartImageConverter x:Key="restartimageconverter"/>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <!--#region Definitions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--#endregion-->
+        <!--#region Info panel-->
+        <Grid Grid.Row="0" MaxHeight="100" Margin="0 0 0 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <local:CounterView Counter="{Binding MinesLeft}"
+                               Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button Grid.Column="3" Background="Transparent" 
+                    Command="{Binding RestartCommand}" BorderThickness="0"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image>
+                    <Image.Source>
+                        <MultiBinding Converter="{StaticResource restartimageconverter}">
+                            <Binding Path="HasWon"/>
+                            <Binding Path="HasLost"/>
+                        </MultiBinding>
+                    </Image.Source>
+                </Image>
+            </Button>
+            <local:CounterView Counter="{Binding TimePlayed}"
+                               Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Minesweeper-->
+        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1"
+                      IsHitTestVisible="{Binding HasLost, Converter={StaticResource boolconverter}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="{Binding ElementName=ItemsControl, Path=DataContext.Height}" 
+                                 Columns="{Binding ElementName=ItemsControl, Path=DataContext.Width}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="viewmodels:SquareViewModel">
+                    <Button 
+                            Background="{Binding IsOpened, Converter={StaticResource backgroundconverter}}"
+                            Foreground="{Binding IsOpened, Converter={StaticResource foregroundconverter}}">
+                        <Button.Content>
+                            <Viewbox>
+                                <TextBlock Text="{Binding Path=Image}"/>
+                            </Viewbox>
+                        </Button.Content>
+                        <Button.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>
+                            <MouseBinding Gesture="MiddleClick" Command="{Binding Path=ChordCommand}"/>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=ItemsControl, Path=DataContext.OpenSeveralCommand}" 
+                                          CommandParameter="{Binding}"/>
+                        </Button.InputBindings>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--#endregion-->
+    </Grid>
+</UserControl>

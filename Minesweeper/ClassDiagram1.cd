@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Minesweeper.Models.SquareModel">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgACAAAAQCEAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SquareModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Minesweeper.ViewModels.SquareViewModel">
-    <Position X="5.5" Y="1.5" Width="1.5" />
+    <Position X="5.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAogAAAAAAACAAAEQCEEAgAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAgAAAAAAAAogAAAgAAgCAAAEQCEFggAAgAgAAAAAA=</HashCode>
       <FileName>ViewModels\SquareViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -18,9 +18,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Minesweeper.Models.MinesweeperModel">
-    <Position X="8.75" Y="4.5" Width="2" />
+    <Position X="9" Y="6" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAABABAAAAQAAAIIAAEAAAAEAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>IAAAAABABIAAAQAEAIIAAEAAAAEAAAAAAEACAAAAAEA=</HashCode>
       <FileName>Models\MinesweeperModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -28,9 +28,9 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Minesweeper.ViewModels.MinesweeperViewModel">
-    <Position X="8.75" Y="1.5" Width="2" />
+    <Position X="9" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAgBAABAAAAAAAAAAAAEAAAAEAAAAABAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAgAAABIAAAAAIAAAAAEAQAAEAAAAABAAKBgAAAmA=</HashCode>
       <FileName>ViewModels\MinesweeperViewModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

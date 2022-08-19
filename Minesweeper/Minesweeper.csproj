@@ -17,11 +17,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\crying.png" />
+    <None Remove="Resources\excited.png" />
+    <None Remove="Resources\happy.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Toolbox\Toolbox.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\crying.png" />
+    <Resource Include="Resources\excited.png" />
+    <Resource Include="Resources\happy.png" />
   </ItemGroup>
 
 </Project>

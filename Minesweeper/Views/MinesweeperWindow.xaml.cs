@@ -12,19 +12,6 @@ namespace Minesweeper
         {
             InitializeComponent();
             Owner = owner;
-            DataContext = new MinesweeperViewModel();
-        }
-
-        private void MenuButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.MainWindow = Owner;
-            Application.Current.MainWindow.Show();
-            Close();
-        }
-
-        private void RestartButton_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
