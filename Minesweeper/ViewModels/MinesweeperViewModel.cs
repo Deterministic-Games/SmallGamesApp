@@ -154,13 +154,12 @@ public class MinesweeperViewModel : BaseViewModel
 
         void Crawl(SquareViewModel current)
         {
-            current.Chord();
             _ = _visited.Add(current);
-
-            foreach (var neighbour in current.Neighbours.Where(n => n.CanChord && !_visited.Contains(n)/* && n.NeighbourMineCount == 0*/))
+            foreach (var neighbour in current.Neighbours.Where(n => n.CanChord && !_visited.Contains(n)/* && n.NeighbourMineCount == 0*/ && !n.IsOpened))
             {
                 Crawl(neighbour);
             }
+            current.Chord();
         }
     }
 
