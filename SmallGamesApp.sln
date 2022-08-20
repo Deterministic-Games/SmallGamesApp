@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToe", "TicTacToe\TicT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Minesweeper", "Minesweeper\Minesweeper.csproj", "{84D70E56-7A20-4818-B408-34FCB4C72143}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox", "Toolbox\Toolbox.csproj", "{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbox", "Toolbox\Toolbox.csproj", "{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallGamesApp", "SmallGamesApp\SmallGamesApp.csproj", "{B18F249B-A035-4FAD-983F-E42D4B7F88B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallGamesApp.Core", "SmallGamesApp.Core\SmallGamesApp.Core.csproj", "{BD879ACA-3D44-43AF-9E17-430BA93F29C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D3C95B-E03C-48A5-BC5B-71EFB482A18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18F249B-A035-4FAD-983F-E42D4B7F88B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18F249B-A035-4FAD-983F-E42D4B7F88B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18F249B-A035-4FAD-983F-E42D4B7F88B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18F249B-A035-4FAD-983F-E42D4B7F88B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD879ACA-3D44-43AF-9E17-430BA93F29C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD879ACA-3D44-43AF-9E17-430BA93F29C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD879ACA-3D44-43AF-9E17-430BA93F29C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD879ACA-3D44-43AF-9E17-430BA93F29C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
