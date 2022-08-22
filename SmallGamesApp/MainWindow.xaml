@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallGamesApp"
-        xmlns:minesweeper="clr-namespace:SmallGamesApp.Minesweeper"
+        xmlns:controls="clr-namespace:SmallGamesApp.Controls"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="400" MinWidth="400" Height="400" Width="400">
     <Grid>
@@ -14,14 +14,15 @@
             <ColumnDefinition Width="19*"/>
         </Grid.ColumnDefinitions>
         <!--#endregion-->
+        
         <!--#region Game view-->
         <Border Grid.Column="1" Background="{StaticResource nord10}">
-            <!--<views:MinesweeperView x:Name="MinesweeperView"/>-->
             <ContentControl Content="{Binding}"/>
         </Border>
         <!--#endregion-->
+        
         <!--#region Navigation sidebar-->
-        <minesweeper:GameListControl />
+        <controls:GameListControl />
         <!--#endregion-->
     </Grid>
 </Window>

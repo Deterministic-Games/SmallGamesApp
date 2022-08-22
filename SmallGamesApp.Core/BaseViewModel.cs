@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace SmallGamesApp.Core.ViewModels;
+namespace SmallGamesApp.Core;
 
 public class BaseViewModel : INotifyPropertyChanged
 {
