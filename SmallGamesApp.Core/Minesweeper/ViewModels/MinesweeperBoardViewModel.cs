@@ -1,15 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using SmallGamesApp.Core.Models;
+using SmallGamesApp.Core.ViewModels;
 
-namespace SmallGamesApp.Core.ViewModels;
+namespace SmallGamesApp.Core.Minesweeper;
 
 public class MinesweeperBoardViewModel : BaseViewModel
 {
     #region Members
 
     //private readonly DispatcherTimer _timer = new() { Interval = new TimeSpan(0, 0, 1) };
-    private readonly Timer _timer;
+    private Timer? _timer;
+    private TimerCallback _timerCallback;
 
     #endregion
 
@@ -62,10 +63,10 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     #region Properties
 
-    private ObservableCollection<MinesweeperSquareViewModel> _squares;
+    private ObservableCollection<MinesweeperSquareViewModel>? _squares;
     public ObservableCollection<MinesweeperSquareViewModel> Squares
     {
-        get => _squares;
+        get => _squares!;
         set
         {
             _squares = value;
@@ -90,8 +91,11 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     #region Commands
 
-    public ICommand OpenSeveralCommand { get; set; }
-    public ICommand RestartCommand { get; set; }
+    private ICommand? _openCommand;
+    public ICommand OpenSeveralCommand => _openCommand ??= new ParameterizedRelayCommand(OpenSeveral);
+
+    private ICommand? _restartCommand;
+    public ICommand RestartCommand => _restartCommand ??= new RelayCommand(Restart);
 
     #endregion
 
@@ -103,10 +107,8 @@ public class MinesweeperBoardViewModel : BaseViewModel
         _minesweeperModel = new(size);
         Size = size;
 
-        var callback = new TimerCallback(Timer_Tick);
-        _timer = new(callback, null, 0, 1000);
+        _timerCallback = new TimerCallback(Timer_Tick);
 
-        //_timer.Tick += new EventHandler(Timer_Tick);
         Initialize();
     }
 
@@ -115,10 +117,8 @@ public class MinesweeperBoardViewModel : BaseViewModel
         _minesweeperModel = new(size);
         Size = size;
 
-        var callback = new TimerCallback(Timer_Tick);
-        _timer = new(callback, null, 0, 1000);
+        _timerCallback = new TimerCallback(Timer_Tick);
 
-        //_timer.Tick += new EventHandler(Timer_Tick);
         Initialize();
     }
 
@@ -126,17 +126,14 @@ public class MinesweeperBoardViewModel : BaseViewModel
     {
         Squares = new(_minesweeperModel.GetSquares().Select(sqr => new MinesweeperSquareViewModel(sqr)));
 
-        OpenSeveralCommand = new ParameterizedRelayCommand(OpenSeveral);
-        RestartCommand = new RelayCommand(Restart);
-
         foreach (var square in Squares)
         {
             square.Neighbours = GetNeighbours(square);
             square.OpenEvent += CheckWinOrLose;
             square.FlagEvent += UpdateMinesLeft;
         }
+        _timer = new(_timerCallback, null, 1000, 1000);
         TimePlayed = 0;
-        //_timer.Start();
     }
 
     #endregion
@@ -167,8 +164,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     public void Restart()
     {
-        //_timer.Stop();
-
+        _timer!.Dispose();
         _minesweeperModel.Restart();
         Initialize();
         OnPropertyChanged("MinesLeft");
@@ -182,12 +178,13 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     private void UpdateMinesLeft(object? sender, EventArgs e) => OnPropertyChanged("MinesLeft");
 
-    private void Timer_Tick(object obj) => TimePlayed++;
+    private void Timer_Tick(object? obj) => TimePlayed++;
 
     private void CheckWinOrLose(object? sender, EventArgs e)
     {
         if (HasLost)
         {
+            _timer!.Dispose();
             foreach (var sqr in Squares.Where(s => s.HasMine))
             {
                 sqr.IsOpened = true;
@@ -196,7 +193,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
         }
         else if (HasWon)
         {
-            //_timer.Stop();
+            _timer!.Dispose();
             foreach (var sqr in Squares.Where(s => !s.IsOpened))
                 sqr.IsFlagged = true;
             OnPropertyChanged("MinesLeft");

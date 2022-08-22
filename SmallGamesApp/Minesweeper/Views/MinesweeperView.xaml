@@ -1,22 +1,21 @@
-﻿<UserControl x:Class="SmallGamesApp.Views.MinesweeperView"
+﻿<UserControl x:Class="SmallGamesApp.Minesweeper.MinesweeperView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SmallGamesApp.Views"
-             xmlns:root="clr-namespace:SmallGamesApp" 
-             xmlns:controls="clr-namespace:SmallGamesApp.Controls"
-             xmlns:viewmodels="clr-namespace:SmallGamesApp.Core.ViewModels;assembly=SmallGamesApp.Core" xmlns:system="clr-namespace:System;assembly=mscorlib"
-             d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperViewModel}"
+             xmlns:local="clr-namespace:SmallGamesApp.Minesweeper"
+             xmlns:root="clr-namespace:SmallGamesApp"
+             xmlns:viewmodels="clr-namespace:SmallGamesApp.Core.Minesweeper;assembly=SmallGamesApp.Core"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperBoardViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400"
              MinHeight="1" MinWidth="1">
     <UserControl.Resources>
-        <root:BackgroundConverter x:Key="backgroundconverter"/>
-        <root:ForegroundConverter x:Key="foregroundconverter"/>
-        <root:InverseBoolValueConverter x:Key="boolconverter"/>
-        <root:RestartImageConverter x:Key="restartimageconverter"/>
-        <root:MinesweeperSquareImageConverter x:Key="squareimageconverter"/>
+        <local:InverseBoolConverter x:Key="boolconverter"/>
+        <local:BackgroundConverter x:Key="backgroundconverter"/>
+        <local:ForegroundConverter x:Key="foregroundconverter"/>
+        <local:RestartImageConverter x:Key="restartimageconverter"/>
+        <local:MinesweeperSquareImageConverter x:Key="squareimageconverter"/>
     </UserControl.Resources>
     <Grid Margin="10">
         <!--#region Definitions-->
@@ -36,7 +35,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <controls:CounterControl Counter="{Binding MinesLeft}"
+            <local:CounterControl Counter="{Binding MinesLeft}"
                                Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             <Button Grid.Column="3" Background="Transparent" 
                     Command="{Binding RestartCommand}" BorderThickness="0"
@@ -50,7 +49,7 @@
                     </Image.Source>
                 </Image>
             </Button>
-            <controls:CounterControl Counter="{Binding TimePlayed}"
+            <local:CounterControl Counter="{Binding TimePlayed}"
                                Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
         <!--#endregion-->

@@ -1,21 +1,15 @@
-﻿using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
-namespace SmallGamesApp;
+namespace SmallGamesApp.Minesweeper;
 public class MinesweeperSquareImageConverter : IValueConverter
 {
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var prefix = "pack://application:,,,/SmallGamesApp;component/Resources";
+        var prefix = "pack://application:,,,/SmallGamesApp;component/Minesweeper/Resources";
 
         if (value is string imageString)
         {

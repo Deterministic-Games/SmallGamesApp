@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
-namespace SmallGamesApp.Core.Models;
+namespace SmallGamesApp.Core.Minesweeper;
 
 public class MinesweeperBoardModel
 {

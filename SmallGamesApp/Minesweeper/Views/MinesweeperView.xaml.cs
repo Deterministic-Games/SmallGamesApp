@@ -1,8 +1,7 @@
 ﻿using System.Windows.Controls;
-using SmallGamesApp.Core.ViewModels;
-using SmallGamesApp.Core.Models;
+using SmallGamesApp.Core.Minesweeper;
 
-namespace SmallGamesApp.Views;
+namespace SmallGamesApp.Minesweeper;
 
 /// <summary>
 /// Interaction logic for MinesweeperView.xaml

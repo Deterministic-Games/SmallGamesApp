@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SmallGamesApp.Controls;
+namespace SmallGamesApp.Minesweeper;
 /// <summary>
 /// Interaction logic for GameListItemControl.xaml
 /// </summary>

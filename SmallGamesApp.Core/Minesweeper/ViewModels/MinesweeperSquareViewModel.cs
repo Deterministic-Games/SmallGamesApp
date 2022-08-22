@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
-using SmallGamesApp.Core.Models;
+using SmallGamesApp.Core.ViewModels;
 
-namespace SmallGamesApp.Core.ViewModels;
+namespace SmallGamesApp.Core.Minesweeper;
 
 public class MinesweeperSquareViewModel : BaseViewModel
 {

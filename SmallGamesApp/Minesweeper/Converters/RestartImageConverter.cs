@@ -3,13 +3,13 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace SmallGamesApp;
+namespace SmallGamesApp.Minesweeper;
 
 public class RestartImageConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        var prefix = "pack://application:,,,/SmallGamesApp;component/Resources";
+        var prefix = "pack://application:,,,/SmallGamesApp;component/Minesweeper/Resources";
         var image = new BitmapImage(new Uri($"{prefix}/excited.png"));
 
         if (values[0] is bool hasWon && values[1] is bool hasLost)

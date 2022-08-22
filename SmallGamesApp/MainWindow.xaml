@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallGamesApp"
-        xmlns:views="clr-namespace:SmallGamesApp.Views"
-        xmlns:controls="clr-namespace:SmallGamesApp.Controls"
+        xmlns:minesweeper="clr-namespace:SmallGamesApp.Minesweeper"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="400" MinWidth="400" Height="400" Width="400">
     <Grid>
@@ -22,7 +21,7 @@
         </Border>
         <!--#endregion-->
         <!--#region Navigation sidebar-->
-        <controls:GameListControl />
+        <minesweeper:GameListControl />
         <!--#endregion-->
     </Grid>
 </Window>

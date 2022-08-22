@@ -1,4 +1,4 @@
-﻿namespace SmallGamesApp.Core.Models;
+﻿namespace SmallGamesApp.Core.Minesweeper;
 
 public class MinesweeperSquareModel
 {
