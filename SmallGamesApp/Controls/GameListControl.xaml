@@ -8,8 +8,10 @@
              d:DesignHeight="400" d:DesignWidth="150">
     <Border Background="{StaticResource nord0}" BorderThickness="0">
         <StackPanel Margin="0">
-            <local:GameListItemControl />
-            <local:GameListItemControl />
+            <!--<local:GameListItemControl />
+            <local:GameListItemControl />-->
+            <RadioButton Style="{StaticResource GameListButton}" Content="Minesweeper"/>
+            <RadioButton Style="{StaticResource GameListButton}" Content="TicTacToe"/>
         </StackPanel>
     </Border>
 </UserControl>

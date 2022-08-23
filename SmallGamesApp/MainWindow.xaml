@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmallGamesApp"
         xmlns:controls="clr-namespace:SmallGamesApp.Controls"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="400" MinWidth="400" Height="400" Width="400">
     <Grid>
@@ -16,13 +17,24 @@
         <!--#endregion-->
         
         <!--#region Game view-->
-        <Border Grid.Column="1" Background="{StaticResource nord10}">
-            <ContentControl Content="{Binding}"/>
+        <Border Grid.Column="1" Background="{StaticResource nord1}">
+            <ContentControl Content="{Binding CurrentView}" Margin="10"/>
         </Border>
         <!--#endregion-->
         
         <!--#region Navigation sidebar-->
-        <controls:GameListControl />
+        <StackPanel Background="{StaticResource nord0}">
+            <RadioButton Style="{StaticResource GameListButton}" Content="Minesweeper" 
+                         Command="{Binding ChangeGameCommand}" CommandParameter="0" IsChecked="True"/>
+            <RadioButton Style="{StaticResource GameListButton}" Content="Tic Tac Toe"
+                         Command="{Binding ChangeGameCommand}" CommandParameter="1"/>
+            <RadioButton Style="{StaticResource GameListButton}" Content="Connect 4"
+                         Command="{Binding ChangeGameCommand}" CommandParameter="2"/>
+            <RadioButton Style="{StaticResource GameListButton}" Content="Memory"
+                         Command="{Binding ChangeGameCommand}" CommandParameter="3"/>
+            <RadioButton Style="{StaticResource GameListButton}" Content="Chess"
+                         Command="{Binding ChangeGameCommand}" CommandParameter="4"/>
+        </StackPanel>
         <!--#endregion-->
     </Grid>
 </Window>

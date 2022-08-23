@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmallGamesApp.Core\SmallGamesApp.Core.csproj" />
+    <ProjectReference Include="..\SmallGamesApp.MVVMToolkit\SmallGamesApp.MVVMToolkit.csproj" />
   </ItemGroup>
 
   <ItemGroup>

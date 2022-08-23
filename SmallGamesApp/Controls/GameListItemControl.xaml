@@ -19,8 +19,8 @@
         <Viewbox Stretch="Uniform" Grid.Column="1" HorizontalAlignment="Right" Visibility="Hidden">
             <Polygon Points="0,25 25,50 25,0" StrokeThickness="0" Fill="{StaticResource nord10}"/>
         </Viewbox>
-        <Button Grid.Column="0" Background="Transparent" BorderThickness="0" 
+        <RadioButton Grid.Column="0" BorderThickness="0" 
                 VerticalContentAlignment="Center" Grid.ColumnSpan="2" 
-                Click="Button_Click"/>
+                Click="Button_Click" Style="{StaticResource GameListButton}"/>
     </Grid>
 </UserControl>

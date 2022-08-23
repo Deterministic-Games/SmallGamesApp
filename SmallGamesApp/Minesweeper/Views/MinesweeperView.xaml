@@ -67,12 +67,6 @@
                 <DataTemplate DataType="viewmodels:SquareViewModel">
                     <Button x:Name="SquareButton">
                         <Image Source="{Binding Image, Converter={StaticResource squareimageconverter}}"/>
-                        <!--<Button.Content>
-                            <Image />
-                             <Viewbox>
-                                <TextBlock Text="{Binding Path=Image}"/>
-                            </Viewbox> 
-                        </Button.Content> -->
                         <Button.InputBindings>
                             <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
                             <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>

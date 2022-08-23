@@ -8,11 +8,9 @@ namespace SmallGamesApp;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public UserControl GameView { get; set; } = new MinesweeperView();
-
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = GameView;
+        DataContext = new MainViewModel();
     }
 }

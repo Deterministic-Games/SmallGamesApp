@@ -28,13 +28,7 @@ public class ParameterizedRelayCommand : ICommand
         remove => CommandManager.RequerySuggested -= value;
     }*/
 
-    public bool CanExecute(object? parameter)
-    {
-        return _predicate();
-    }
+    public bool CanExecute(object? parameter) => _predicate();
 
-    public void Execute(object? parameter)
-    {
-        _action(parameter);
-    }
+    public void Execute(object? parameter) => _action(parameter);
 }
