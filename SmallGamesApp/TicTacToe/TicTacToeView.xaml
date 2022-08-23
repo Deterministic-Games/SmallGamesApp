@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="SmallGamesApp.TicTacToe.TicTacToeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmallGamesApp.TicTacToe"
+             xmlns:viewmodels="clr-namespace:SmallGamesApp.MVVMToolkit.TicTacToe;assembly=SmallGamesApp.MVVMToolkit"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TicTacToeBoardViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:StateToContentConverter x:Key="stateconverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <!--#region Definitions-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--#endregion-->
+
+        <TextBlock Text="{Binding IsGameOver}" Grid.Row="0"/>
+
+        <!--#region TicTacToe-->
+        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="3" Columns="3"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!--#region Template-->
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="viewmodels:TicTacToeSquareViewModel">
+                    <Button Command="{Binding UpdateStateCommand}" x:Name="SquareButton"
+                            CommandParameter="{Binding ElementName=ItemsControl, Path=DataContext}" 
+                            Background="{StaticResource nord4}" Foreground="{StaticResource nord0}">
+                        <Button.Content>
+                            <Viewbox>
+                                <TextBlock Text="{Binding State, Converter={StaticResource stateconverter}}"/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <!--#endregion-->
+        </ItemsControl>
+        <!--#endregion-->
+    </Grid>
+</UserControl>
