@@ -4,12 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmallGamesApp.TicTacToe"
+             xmlns:root="clr-namespace:SmallGamesApp"
              xmlns:viewmodels="clr-namespace:SmallGamesApp.MVVMToolkit.TicTacToe;assembly=SmallGamesApp.MVVMToolkit"
+             xmlns:msviews="clr-namespace:SmallGamesApp.Minesweeper"
              d:DataContext="{d:DesignInstance Type=viewmodels:TicTacToeBoardViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:StateToContentConverter x:Key="stateconverter"/>
+        <local:BoolToVisibilityConverter x:Key="visibilityconverter"/>
+        <root:InverseBoolConverter x:Key="boolconverter"/>
     </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->
@@ -21,10 +25,50 @@
         
         <!--#endregion-->
 
-        <TextBlock Text="{Binding IsGameOver}" Grid.Row="0"/>
+        <!--#region Info panel-->
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+                    <TextBlock Text="Current player" Foreground="{StaticResource nord0}" FontWeight="Bold"/>
+                </Viewbox>
+                <Border BorderThickness="5" BorderBrush="{StaticResource nord0}"  Background="{StaticResource nord4}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding CurrentPlayer}" Foreground="{StaticResource nord11}" FontWeight="Bold"/>
+                    </Viewbox>
+                </Border>
+            </Grid>
+            
+            <Border BorderThickness="5" BorderBrush="{StaticResource nord0}"  Background="{StaticResource nord4}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="3" Grid.ColumnSpan="2">
+                <Button Command="{Binding RestartCommand}">
+                    <Button.Content>
+                        <Viewbox>
+                            <TextBlock Text="Restart" Foreground="{StaticResource nord11}" FontWeight="Bold"/>
+                        </Viewbox>
+                    </Button.Content>
+                </Button>
+            </Border>
+        </Grid>
+
+        <!--#endregion-->
 
         <!--#region TicTacToe-->
-        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1" 
+                      IsHitTestVisible="{Binding IsGameOver, Converter={StaticResource boolconverter}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="3" Columns="3"/>
@@ -46,6 +90,23 @@
             </ItemsControl.ItemTemplate>
             <!--#endregion-->
         </ItemsControl>
+
+        <Grid Grid.Row="1" IsHitTestVisible="False" 
+              Visibility="{Binding IsGameOver, Converter={StaticResource visibilityconverter}}"
+              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,50,50,50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="0">
+                <TextBlock Text="Winner is" Foreground="{StaticResource nord11}"/>
+            </Viewbox>
+            <Viewbox Grid.Row="1">
+                <TextBlock Text="{Binding Winner}" Foreground="{StaticResource nord11}"/>
+            </Viewbox>
+        </Grid>
+        
+        
         <!--#endregion-->
     </Grid>
 </UserControl>

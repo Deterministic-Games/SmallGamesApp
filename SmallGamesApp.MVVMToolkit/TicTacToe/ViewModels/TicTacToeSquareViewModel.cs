@@ -7,6 +7,7 @@ namespace SmallGamesApp.Core.TicTacToe;
 public partial class TicTacToeSquareViewModel : ObservableObject
 {
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsOccupied))]
     [NotifyCanExecuteChangedFor(nameof(UpdateStateCommand))]
     private SquareState _state = SquareState.Empty;
 

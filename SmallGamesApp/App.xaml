@@ -9,6 +9,9 @@
              xmlns:tictactoecore="clr-namespace:SmallGamesApp.MVVMToolkit.TicTacToe;assembly=SmallGamesApp.MVVMToolkit"
              xmlns:tictactoe="clr-namespace:SmallGamesApp.TicTacToe"
              
+             xmlns:connectfourcore="clr-namespace:SmallGamesApp.MVVMToolkit.ConnectFour;assembly=SmallGamesApp.MVVMToolkit"
+             xmlns:connectfour="clr-namespace:SmallGamesApp.ConnectFour"
+             
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -22,6 +25,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type tictactoecore:TicTacToeBoardViewModel}">
                 <tictactoe:TicTacToeView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type connectfourcore:ConnectFourBoardVM}">
+                <connectfour:ConnectFourView />
             </DataTemplate>
             
         </ResourceDictionary>

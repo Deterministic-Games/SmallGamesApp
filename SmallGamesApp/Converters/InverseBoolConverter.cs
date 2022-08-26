@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace SmallGamesApp.Minesweeper;
+namespace SmallGamesApp;
 
 public class InverseBoolConverter : IValueConverter
 {

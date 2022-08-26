@@ -11,7 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="400"
              MinHeight="1" MinWidth="1">
     <UserControl.Resources>
-        <local:InverseBoolConverter x:Key="boolconverter"/>
+        <root:InverseBoolConverter x:Key="boolconverter"/>
         <local:BackgroundConverter x:Key="backgroundconverter"/>
         <local:ForegroundConverter x:Key="foregroundconverter"/>
         <local:RestartImageConverter x:Key="restartimageconverter"/>
