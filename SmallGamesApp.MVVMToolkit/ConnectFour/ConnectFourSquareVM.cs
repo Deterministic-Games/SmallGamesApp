@@ -4,31 +4,27 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace SmallGamesApp.MVVMToolkit.ConnectFour;
 
-public partial class ConnectFourSquareVM : ObservableRecipient
+public partial class ConnectFourSquareVM : ObservableObject
 {
     #region Properties
 
     [ObservableProperty]
-    [NotifyCanExecuteChangedFor(nameof(UpdateStateCommand))]
     private SquareState _state = SquareState.Empty;
 
-    public bool IsOccupied => _state != SquareState.Empty;
+    public bool IsAvailable => _state == SquareState.Empty;
 
-    public bool IsAvailable => Placement.row == 5 && !IsOccupied;
-
-    public (int row, int col) Placement { get; init; }
+    public int Column { get; init; }
+    public int Row { get; init; }
 
     #endregion
 
     #region Constructor
 
-    public ConnectFourSquareVM((int, int) placement) 
+    public ConnectFourSquareVM(int col, int row) 
     {
-        Placement = placement;
+        Column = col;
+        Row = row;
     }
 
     #endregion
-
-    [RelayCommand(CanExecute = nameof(IsAvailable))]
-    private void UpdateState() => State = SquareState.Player2;
 }

@@ -18,7 +18,13 @@ public partial class TicTacToeBoardViewModel : ObservableObject
     public bool IsGameOver => CheckForWin();
 
     [ObservableProperty]
-    private SquareState _winner; 
+    private SquareState _winner;
+
+    private static readonly IDictionary<SquareState, SquareState> s_playerMap = new Dictionary<SquareState, SquareState>
+    {
+        { SquareState.Player1, SquareState.Player2 },
+        { SquareState.Player2, SquareState.Player1 }
+    };
 
     #endregion
 
@@ -55,7 +61,9 @@ public partial class TicTacToeBoardViewModel : ObservableObject
     {
         var array = Squares.ToArray();
 
-        var player = CurrentPlayer == SquareState.Player1 ? SquareState.Player2 : SquareState.Player1;
+        //var player = CurrentPlayer == SquareState.Player1 ? SquareState.Player2 : SquareState.Player1;
+
+        var player = s_playerMap[CurrentPlayer];
 
         var predicate = (TicTacToeSquareViewModel sqr) => sqr.State == player;
 

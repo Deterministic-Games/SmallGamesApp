@@ -28,7 +28,8 @@
                 <DataTemplate DataType="viewmodels:ConnectFourSquareVM">
                     <Button Style="{StaticResource ConnectFourButton}" 
                             Foreground="{Binding State, Converter={StaticResource colorconverter}}" 
-                            Command="{Binding UpdateStateCommand}"/>
+                            Command="{Binding ElementName=ItemsControl, Path=DataContext.PlaceTokenCommand}"
+                            CommandParameter="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <!--#endregion-->
