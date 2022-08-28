@@ -4,23 +4,27 @@ using System.Collections.ObjectModel;
 namespace SmallGamesApp.MVVMToolkit.ConnectFour;
 public class ConnectFourBoardVM : ObservableObject
 {
-    public ObservableCollection<ConnectFourColumnVM> Columns { get; set; } = new();
-
 	public ObservableCollection<ConnectFourSquareVM> Squares { get; set; } = new();
 
 	public ConnectFourBoardVM()
 	{
 		for (int col = 0; col < 7; col++)
 		{
-            Columns.Add(new ConnectFourColumnVM());
-        }
+			var column = new ConnectFourSquareVM[]
+            {
+				new(0),
+				new(1),
+				new(2),
+				new(3),
+                new(4),
+                new(5),
+            };
 
-		for (int row = 0; row < 6; row++)
-		{
-			for (int col = 0; col < 7; col++)
+            for (int row = 0; row < 6; row++)
 			{
-				Columns[col].AddFirst();
-				Squares.Add(Columns[col].First!);
+				var square = column[row];
+                square.Column = column;
+				Squares.Add(square);
 			}
 		}
 	}
