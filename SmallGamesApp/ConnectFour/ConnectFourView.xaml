@@ -8,22 +8,27 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:ConnectFourBoardVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:StateToColorConverter x:Key="colorconverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".15*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ItemsControl ItemsSource="{Binding Columns}" x:Name="ItemsControl" Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="7"/>
+                    <UniformGrid Columns="7" Rows="6"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <!--#region Template-->
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="viewmodels:ConnectFourColumnVM">
-                    <local:ColumnControl />
+                <DataTemplate DataType="viewmodels:ConnectFourSquareVM">
+                    <Button Style="{StaticResource ConnectFourButton}" 
+                            Foreground="{Binding State, Converter={StaticResource colorconverter}}" 
+                            Command="{Binding UpdateStateCommand}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <!--#endregion-->

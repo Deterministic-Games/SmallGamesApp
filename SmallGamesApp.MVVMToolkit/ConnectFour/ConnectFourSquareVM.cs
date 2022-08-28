@@ -1,37 +1,34 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace SmallGamesApp.MVVMToolkit.ConnectFour;
 
-public partial class ConnectFourSquareVM : ObservableObject
+public partial class ConnectFourSquareVM : ObservableRecipient
 {
+    #region Properties
+
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(UpdateStateCommand))]
     private SquareState _state = SquareState.Empty;
 
     public bool IsOccupied => _state != SquareState.Empty;
 
-    public bool IsAvailable => IsEmptyAbove();
+    public bool IsAvailable => Placement.row == 5 && !IsOccupied;
 
-    public ConnectFourSquareVM? Above { get; set; }
+    public (int row, int col) Placement { get; init; }
 
-    public ConnectFourSquareVM? Below { get; set; }
+    #endregion
 
-    public ConnectFourSquareVM(ConnectFourSquareVM? above, ConnectFourSquareVM? below)
+    #region Constructor
+
+    public ConnectFourSquareVM((int, int) placement) 
     {
-        Above = above;
-        Below = below;
+        Placement = placement;
     }
 
-    public ConnectFourSquareVM() { }
+    #endregion
 
-    public bool IsEmptyAbove()
-    {
-        if (Above is null)
-            return true;
-
-        return Above.State is SquareState.Empty && Above.IsEmptyAbove();
-    }
-
-    [RelayCommand]
-    private void UpdateState(SquareState state) => State = state;
+    [RelayCommand(CanExecute = nameof(IsAvailable))]
+    private void UpdateState() => State = SquareState.Player2;
 }

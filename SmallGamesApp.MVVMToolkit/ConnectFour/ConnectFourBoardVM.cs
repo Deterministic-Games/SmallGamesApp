@@ -8,23 +8,11 @@ public class ConnectFourBoardVM : ObservableObject
 
 	public ConnectFourBoardVM()
 	{
-		for (int col = 0; col < 7; col++)
+		for (int row = 0; row < 6; row++)
 		{
-			var column = new ConnectFourSquareVM[]
-            {
-				new(0),
-				new(1),
-				new(2),
-				new(3),
-                new(4),
-                new(5),
-            };
-
-            for (int row = 0; row < 6; row++)
+			for (int col = 0; col < 7; col++)
 			{
-				var square = column[row];
-                square.Column = column;
-				Squares.Add(square);
+				Squares.Add(new((row, col)));
 			}
 		}
 	}
