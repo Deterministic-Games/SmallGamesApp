@@ -71,26 +71,25 @@ public partial class ConnectFourBoardVM : ObservableObject
 		int row = nSquare.Row;
 		int col = nSquare.Column;
 
-		// Check row
-		if (CheckRowForWin(row, col))
-			Debug.WriteLine("Row win");
-
-		// Check column if new square placed in top 3 rows
-		if (row <= 2)
-		{
-			if (CheckColumnForWin(row, col))
-                Debug.WriteLine("Col win");
+		if (CheckRowForWin(row, col)) // Check row
+        {
+			Winner = _currentPlayer;
+		}
+        else if (CheckDiagonals(row, col)) // Check diagonals
+        {
+            Winner = _currentPlayer;
         }
-
-		// Check diagonals
-		if (CheckDiagonals(row, col))
-			Debug.WriteLine("Diag win");
+        else if (row <= 2) // Check column
+		{
+            if (CheckColumnForWin(row, col))
+                Winner = _currentPlayer;
+        }
     }
 
-	private bool CheckColumnForWin(int startRow, int startCol)
+	private bool CheckColumnForWin(int row, int col)
 	{
-		int StartIndex = FlattenIndex(startRow + 1, startCol);
-		int maxIndex = FlattenIndex(startRow + 3, startCol);
+		int StartIndex = FlattenIndex(row + 1, col);
+		int maxIndex = FlattenIndex(row + 3, col);
 
 		for (int i = StartIndex; i <= maxIndex; i += 7)
 		{
@@ -99,17 +98,17 @@ public partial class ConnectFourBoardVM : ObservableObject
         return true;
 	}
 
-	private bool CheckRowForWin(int startRow, int startCol)
+	private bool CheckRowForWin(int row, int col)
 	{
 		int connected = 0;
 
-		int index = FlattenIndex(startRow, startCol);
+		int index = FlattenIndex(row, col);
 
-        int minColumn = Math.Max(0, startCol - 3);
-        int startIndex = FlattenIndex(startRow, minColumn);
+        int minColumn = Math.Max(0, col - 3);
+        int startIndex = FlattenIndex(row, minColumn);
 
-        int maxColumn = Math.Min(6, startCol + 3);
-        int endIndex = FlattenIndex(startRow, maxColumn);
+        int maxColumn = Math.Min(6, col + 3);
+        int endIndex = FlattenIndex(row, maxColumn);
 
         for (int i = startIndex; i <= endIndex; i++)
 		{
@@ -124,48 +123,68 @@ public partial class ConnectFourBoardVM : ObservableObject
 		return false;
     }
 
-	// Checks from upper left to lower right and from lower left to upper right
-	private bool CheckDiagonals(int startRow, int startCol)
+	private bool CheckDiagonals(int row, int col)
 	{
-        int index = FlattenIndex(startRow, startCol);
+        int index = FlattenIndex(row, col);
 
-		// This diagonal "/"
-		int maxDownOffset = Math.Min(Math.Abs(startRow + 3), Math.Abs(startCol - 3)) * 6;
+        int rowsDown = Math.Min(3, 5 - row);
+        int rowsUp = Math.Min(3, row);
+        int rowsLeft = Math.Min(3, col);
+        int rowsRight = Math.Min(3, 6 - col);
 
-		return false;
+		// Upper left <-> lower right
+		int upperLeft = UpwardDiagonalConnected(rowsUp, rowsLeft, 8, index);
+		int lowerRight = DownwardDiagonalConnected(rowsDown, rowsRight, 8, index);
 
-        /*int minRow = Math.Max(0, startRow - 3);
-        int maxRow = Math.Min(5, startRow + 3);
+        if (upperLeft + lowerRight >= 3)
+            return true;
 
-		int minCol = Math.Max(0, startCol - 3);
-		int maxCol = Math.Min(6, startCol + 3);
+		// Lower left <-> upper right
+		int lowerLeft = DownwardDiagonalConnected(rowsDown, rowsLeft, 6, index);
+		int upperRight = UpwardDiagonalConnected(rowsUp, rowsRight, 6, index);
 
-		int connectedFromUp = 0;
-		int connectedFromDown = 0;
+        if (lowerLeft + upperRight >= 3)
+            return true;
 
-		int rowFromUp = minRow;
-        int rowFromDown = maxRow;
+        return false;
+    }
 
-        for (int col = minCol; col <= maxCol; col++)
-		{
-			if (col == startCol)
-				continue;
+	public int UpwardDiagonalConnected(int rows, int cols, int offset, int index)
+	{
+        int connected = 0;
+        int maxOffset = Math.Min(rows, cols);
 
-			var fromUp = Squares[FlattenIndex(rowFromUp, col)];
-			var fromDown = Squares[FlattenIndex(rowFromDown, col)];
+        if (maxOffset == 0)
+            return 0;
 
-            connectedFromUp = fromUp.State == _currentPlayer ? connectedFromUp + 1 : 0;
-            connectedFromDown = fromDown.State == _currentPlayer ? connectedFromDown + 1 : 0;
+        int minIndex = index - (maxOffset * offset);
 
-			if (connectedFromUp >= 3 || connectedFromDown >= 3)
-				return true;
-
-			if (rowFromUp > minRow)
-				rowFromUp--;
-			if (rowFromDown < maxRow)
-				rowFromDown++;
+        for (int i = index - offset; i >= minIndex; i -= offset)
+        {
+            if (Squares[i].State != _currentPlayer)
+                break;
+            connected++;
         }
-		return false;*/
+        return connected;
+    }
+
+    public int DownwardDiagonalConnected(int rows, int cols, int offset, int index)
+    {
+        int connected = 0;
+        int maxOffset = Math.Min(rows, cols);
+
+        if (maxOffset == 0)
+            return 0;
+
+        int maxIndex = index + (maxOffset * offset);
+
+        for (int i = index + offset; i <= maxIndex; i += offset)
+        {
+            if (Squares[i].State != _currentPlayer)
+                break;
+            connected++;
+        }
+        return connected;
     }
 
 
