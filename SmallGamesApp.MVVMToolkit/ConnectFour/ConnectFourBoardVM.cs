@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace SmallGamesApp.MVVMToolkit.ConnectFour;
 public partial class ConnectFourBoardVM : ObservableObject
@@ -12,10 +10,13 @@ public partial class ConnectFourBoardVM : ObservableObject
     public ObservableCollection<ConnectFourSquareVM> Squares { get; set; } = new();
 
 	[ObservableProperty]
-	private SquareState _currentPlayer = SquareState.Player1;
+	private SquareState _currentPlayer;
 
 	[ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsGameOver))]
 	private SquareState _winner;
+
+    public bool IsGameOver => _winner != SquareState.Empty;
 
     #endregion
 
@@ -33,16 +34,29 @@ public partial class ConnectFourBoardVM : ObservableObject
 
     public ConnectFourBoardVM()
 	{
-		for (int row = 0; row < 6; row++)
-		{
-			for (int col = 0; col < 7; col++)
-			{
-				Squares.Add(new(col, row));
-			}
-		}
+        for (int row = 0; row < 6; row++)
+        {
+            for (int col = 0; col < 7; col++)
+            {
+                Squares.Add(new(col, row));
+            }
+        }
+        Initialize();
 	}
 
+    private void Initialize()
+    {
+        foreach (var square in Squares)
+        {
+            square.State = SquareState.Empty;
+        }
+        CurrentPlayer = SquareState.Player1;
+        Winner = SquareState.Empty;
+    }
+
     #endregion
+
+    #region Commands
 
     [RelayCommand]
 	private void PlaceToken(ConnectFourSquareVM sqr)
@@ -63,6 +77,11 @@ public partial class ConnectFourBoardVM : ObservableObject
 			}
 		}
 	}
+
+    [RelayCommand]
+    private void Restart() => Initialize();
+
+    #endregion
 
     #region Private methods
 
