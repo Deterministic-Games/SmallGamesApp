@@ -1,4 +1,4 @@
-﻿using SmallGamesApp.MVVMToolkit.ConnectFour;
+﻿using SmallGamesApp.MVVMToolkit;
 using System;
 using System.Globalization;
 using System.Windows.Data;

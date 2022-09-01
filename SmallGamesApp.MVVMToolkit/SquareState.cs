@@ -1,4 +1,4 @@
-﻿namespace SmallGamesApp.MVVMToolkit.ConnectFour;
+﻿namespace SmallGamesApp.MVVMToolkit;
 
 public enum SquareState
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using SmallGamesApp.MVVMToolkit.TicTacToe;
+using SmallGamesApp.MVVMToolkit;
 
 namespace SmallGamesApp.TicTacToe;
 
