@@ -11,6 +11,9 @@
              
              xmlns:connectfourcore="clr-namespace:SmallGamesApp.MVVMToolkit.ConnectFour;assembly=SmallGamesApp.MVVMToolkit"
              xmlns:connectfour="clr-namespace:SmallGamesApp.ConnectFour"
+            
+             xmlns:memorycore="clr-namespace:SmallGamesApp.MVVMToolkit.Memory;assembly=SmallGamesApp.MVVMToolkit"
+             xmlns:memory="clr-namespace:SmallGamesApp.Memory"
              
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -21,6 +24,7 @@
                 <ResourceDictionary Source="Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
+            <!--#region Game data templates-->
             <DataTemplate DataType="{x:Type minesweepercore:MinesweeperBoardViewModel}">
                 <minesweeper:MinesweeperView />
             </DataTemplate>
@@ -30,7 +34,11 @@
             <DataTemplate DataType="{x:Type connectfourcore:ConnectFourBoardVM}">
                 <connectfour:ConnectFourView />
             </DataTemplate>
-            
+            <DataTemplate DataType="{x:Type memorycore:MemoryBoardVM}">
+                <memory:MemoryView />
+            </DataTemplate>
+            <!--#endregion-->
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

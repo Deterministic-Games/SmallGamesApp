@@ -19,17 +19,26 @@
     <SolidColorBrush x:Key="nord6" Color="#ECEFF4" />
     
     <!--Frost-->
-    <SolidColorBrush x:Key="nord7" Color="#8FBCBB" />
-    <SolidColorBrush x:Key="nord8" Color="#88C0D0" />
-    <SolidColorBrush x:Key="nord9" Color="#81A1C1" />
-    <SolidColorBrush x:Key="nord10" Color="#5E81AC" />
+    <Color x:Key="nord7color">#8FBCBB</Color>
+    <SolidColorBrush x:Key="nord7" Color="{StaticResource nord7color}"/>
+    <Color x:Key="nord8color">#88C0D0</Color>
+    <SolidColorBrush x:Key="nord8" Color="{StaticResource nord8color}"/>
+    <Color x:Key="nord9color">#81A1C1</Color>
+    <SolidColorBrush x:Key="nord9" Color="{StaticResource nord9color}"/>
+    <Color x:Key="nord10color">#5E81AC</Color>
+    <SolidColorBrush x:Key="nord10" Color="{StaticResource nord10color}" />
     
     <!--Aurora-->
-    <SolidColorBrush x:Key="nord11" Color="#BF616A" />
-    <SolidColorBrush x:Key="nord12" Color="#D08770" />
-    <SolidColorBrush x:Key="nord13" Color="#EBCB8B" />
-    <SolidColorBrush x:Key="nord14" Color="#A3BE8C" />
-    <SolidColorBrush x:Key="nord15" Color="#B48EAD" />
+    <Color x:Key="nord11color">#BF616A</Color>
+    <SolidColorBrush x:Key="nord11" Color="{StaticResource nord11color}"/>
+    <Color x:Key="nord12color">#D08770</Color>
+    <SolidColorBrush x:Key="nord12" Color="{StaticResource nord12color}"/>
+    <Color x:Key="nord13color">#EBCB8B</Color>
+    <SolidColorBrush x:Key="nord13" Color="{StaticResource nord13color}"/>
+    <Color x:Key="nord14color">#A3BE8C</Color>
+    <SolidColorBrush x:Key="nord14" Color="{StaticResource nord14color}"/>
+    <Color x:Key="nord15color">#B48EAD</Color>
+    <SolidColorBrush x:Key="nord15" Color="{StaticResource nord15color}"/>
     
     <!--#endregion-->
 </ResourceDictionary>
