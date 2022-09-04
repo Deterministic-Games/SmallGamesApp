@@ -38,6 +38,8 @@ public partial class MemoryBoardVM : ObservableObject
 
     private int _sequenceNumber;
 
+    private readonly Random _rand = new();
+
     #endregion
 
     public MemoryBoardVM()
@@ -52,7 +54,7 @@ public partial class MemoryBoardVM : ObservableObject
     private async void StartNextTurn()
     {
         _sequenceNumber = 0;
-        int i = Random.Shared.Next(Squares.Count);
+        int i = _rand.Next(Squares.Count);
         _sequence.Add(i);
 
         await Task.Delay(500);
