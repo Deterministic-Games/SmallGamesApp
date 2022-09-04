@@ -32,15 +32,8 @@
                 </Viewbox>
             </Border>
         </Grid>
-        <Border Grid.Column="2" Style="{StaticResource InfoBox}">
-            <Button Command="{Binding ElementName=infopanel, Path=RestartCommand}" Background="Transparent">
-                <Button.Content>
-                    <Viewbox>
-                        <TextBlock Text="Restart" Style="{StaticResource InfoText}"/>
-                    </Viewbox>
-                </Button.Content>
-            </Button>
-        </Border>
+        <Button Style="{StaticResource DefaultUIButton}" Command="{Binding ElementName=infopanel, Path=RestartCommand}" 
+                Grid.Column="3" Content="Restart"/>
         <Border Grid.ColumnSpan="2" 
                 Visibility="{Binding ElementName=infopanel, Path=IsGameOver, Converter={StaticResource visibilityconverter}}" 
                 Style="{StaticResource InfoBox}">

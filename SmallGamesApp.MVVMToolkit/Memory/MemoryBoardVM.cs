@@ -20,7 +20,7 @@ public partial class MemoryBoardVM : ObservableObject
             _turn = value;
             OnPropertyChanged();
 
-            if (value % 5 == 0)
+            if (value % 5 == 0 && Squares.Count < 6)
                 Squares.Add(new() { Position = Squares.Count });
 
             StartNextTurn();
@@ -29,6 +29,12 @@ public partial class MemoryBoardVM : ObservableObject
 
     [ObservableProperty]
     private bool _isGameOver;
+
+    /// <summary>
+    /// A property to stop the player from pressing any buttons while the sequence is being shown
+    /// </summary>
+    [ObservableProperty]
+    private bool _isNotShowingSequence;
 
     #endregion
 
@@ -59,10 +65,14 @@ public partial class MemoryBoardVM : ObservableObject
 
         await Task.Delay(500);
 
+        IsNotShowingSequence = false;
+
         foreach (var num in _sequence)
         {
             await FlashSquare(Squares[num]);
         }
+
+        IsNotShowingSequence = true;
     }
 
     private async Task FlashSquare(MemorySquareVM square)
@@ -89,5 +99,18 @@ public partial class MemoryBoardVM : ObservableObject
             Turn++;
         else
             _sequenceNumber++;
+    }
+
+    [RelayCommand]
+    private void Restart()
+    {
+        _sequence.Clear();
+
+        while (Squares.Count > 4)
+        {
+            Squares.RemoveAt(4);
+        }
+        IsGameOver = false;
+        Turn = 1;
     }
 }

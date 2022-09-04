@@ -80,4 +80,29 @@
         </Setter>
     </Style>
     <!--#endregion-->
+
+    <Style x:Key="DefaultUIButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderThickness="5" BorderBrush="{StaticResource nord0}">
+                        <Button Background="{StaticResource nord4}" Foreground="{StaticResource nord11}"
+                                Command="{TemplateBinding Command}">
+                            <Button.Content>
+                                <Viewbox>
+                                    <TextBlock Text="{TemplateBinding Content}" FontWeight="Bold"/>
+                                </Viewbox>
+                            </Button.Content>
+                        </Button>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Background" Value="{StaticResource nord4}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource nord0}"/>
+        <Setter Property="BorderThickness" Value="5"/>
+        <Setter Property="Foreground" Value="{StaticResource nord11}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
 </ResourceDictionary>

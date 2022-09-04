@@ -13,12 +13,12 @@ public class PositionToColorConverter : MarkupExtension, IValueConverter
 
         return i switch
         {
-            0 => App.Current.FindResource("nord10"),
-            1 => App.Current.FindResource("nord11"),
-            2 => App.Current.FindResource("nord12"),
-            3 => App.Current.FindResource("nord13"),
-            4 => App.Current.FindResource("nord14"),
-            5 => App.Current.FindResource("nord15"),
+            0 => App.Current.FindResource("nord11"),
+            1 => App.Current.FindResource("nord12"),
+            2 => App.Current.FindResource("nord13"),
+            3 => App.Current.FindResource("nord14"),
+            4 => App.Current.FindResource("nord15"),
+            5 => App.Current.FindResource("nord10"),
             _ => App.Current.FindResource("nord4")
         };
            

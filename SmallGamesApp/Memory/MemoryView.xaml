@@ -11,6 +11,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:InverseBoolConverter x:Key="boolconverter"/>
+        <local:BoolToVisibilityConverter x:Key="visibilityconverter"/>
     </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->
@@ -22,17 +23,33 @@
 
         <!--#endregion-->
 
+        <!--#region Info panel-->
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <controls:CounterControl Counter="{Binding Turn}" Grid.Column="0"/>
+            <Viewbox>
+                <TextBlock Style="{StaticResource InfoText}" Text="Round"/>
+            </Viewbox>
+            <controls:CounterControl Counter="{Binding Turn}" Grid.Column="1"/>
         </Grid>
 
+        <Grid Visibility="{Binding IsGameOver, Converter={StaticResource visibilityconverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox>
+                <TextBlock Text="{Binding Turn, StringFormat='You survived {0} rounds!'}" Style="{StaticResource InfoText}"/>
+            </Viewbox>
+            <Button Style="{StaticResource DefaultUIButton}" Grid.Column="1" Content="Restart" Command="{Binding RestartCommand}"/>
+        </Grid>
+        <!--#endregion-->
+
         <!--#region Game-->
-        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1" 
-                      IsHitTestVisible="{Binding IsGameOver, Converter={StaticResource boolconverter}}">
+        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="2"/>
@@ -49,7 +66,6 @@
             </ItemsControl.ItemTemplate>
             <!--#endregion-->
         </ItemsControl>
-
         <!--#endregion-->
     </Grid>
 </UserControl>

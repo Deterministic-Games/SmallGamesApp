@@ -3,42 +3,60 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SmallGamesApp">
 
-    <SolidColorBrush x:Key="Graphite" Color="#101010" />
-    
-    <!--#region Nord-->
+    <!--#region Nord theme-->
     
     <!--Polar night-->
-    <SolidColorBrush x:Key="nord0" Color="#2E3440" />
-    <SolidColorBrush x:Key="nord1" Color="#3B4252" />
-    <SolidColorBrush x:Key="nord2" Color="#434C5E" />
-    <SolidColorBrush x:Key="nord3" Color="#4C566A" />
+    <Color x:Key="nord0color">#2E3440</Color>
+    <SolidColorBrush x:Key="nord0" Color="{StaticResource nord0color}"/>
+    
+    <Color x:Key="nord1color">#3B4252</Color>
+    <SolidColorBrush x:Key="nord1" Color="{StaticResource nord1color}"/>
+    
+    <Color x:Key="nord2color">#434C5E</Color>
+    <SolidColorBrush x:Key="nord2" Color="{StaticResource nord2color}"/>
+    
+    <Color x:Key="nord3color">#4C566A</Color>
+    <SolidColorBrush x:Key="nord3" Color="{StaticResource nord3color}"/>
     
     <!--Snow storm-->
-    <SolidColorBrush x:Key="nord4" Color="#D8DEE9" />
-    <SolidColorBrush x:Key="nord5" Color="#E5E9F0" />
-    <SolidColorBrush x:Key="nord6" Color="#ECEFF4" />
+    <Color x:Key="nord4color">#D8DEE9</Color>
+    <SolidColorBrush x:Key="nord4" Color="{StaticResource nord4color}"/>
+    
+    <Color x:Key="nord5color">#E5E9F0</Color>
+    <SolidColorBrush x:Key="nord5" Color="{StaticResource nord5color}"/>
+    
+    <Color x:Key="nord6color">#ECEFF4</Color>
+    <SolidColorBrush x:Key="nord6" Color="{StaticResource nord6color}"/>
     
     <!--Frost-->
     <Color x:Key="nord7color">#8FBCBB</Color>
     <SolidColorBrush x:Key="nord7" Color="{StaticResource nord7color}"/>
+    
     <Color x:Key="nord8color">#88C0D0</Color>
     <SolidColorBrush x:Key="nord8" Color="{StaticResource nord8color}"/>
+    
     <Color x:Key="nord9color">#81A1C1</Color>
     <SolidColorBrush x:Key="nord9" Color="{StaticResource nord9color}"/>
+    
     <Color x:Key="nord10color">#5E81AC</Color>
-    <SolidColorBrush x:Key="nord10" Color="{StaticResource nord10color}" />
+    <SolidColorBrush x:Key="nord10" Color="{StaticResource nord10color}"/>
     
     <!--Aurora-->
     <Color x:Key="nord11color">#BF616A</Color>
     <SolidColorBrush x:Key="nord11" Color="{StaticResource nord11color}"/>
+    
     <Color x:Key="nord12color">#D08770</Color>
     <SolidColorBrush x:Key="nord12" Color="{StaticResource nord12color}"/>
+    
     <Color x:Key="nord13color">#EBCB8B</Color>
     <SolidColorBrush x:Key="nord13" Color="{StaticResource nord13color}"/>
+    
     <Color x:Key="nord14color">#A3BE8C</Color>
     <SolidColorBrush x:Key="nord14" Color="{StaticResource nord14color}"/>
+    
     <Color x:Key="nord15color">#B48EAD</Color>
     <SolidColorBrush x:Key="nord15" Color="{StaticResource nord15color}"/>
     
     <!--#endregion-->
+    
 </ResourceDictionary>
