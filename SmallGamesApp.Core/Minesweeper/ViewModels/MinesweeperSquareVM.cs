@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 
-namespace SmallGamesApp.Core.Minesweeper;
+namespace SmallGamesApp.Core;
 
-public class MinesweeperSquareViewModel : BaseViewModel
+public class MinesweeperSquareVM : BaseViewModel
 {
     #region Members
 
@@ -69,8 +69,8 @@ public class MinesweeperSquareViewModel : BaseViewModel
     public bool CanFlag => !IsOpened;
     public bool CanChord => _neighbours.FindAll(n => n.IsFlagged).Count == NeighbourMineCount;
 
-    private List<MinesweeperSquareViewModel> _neighbours = new();
-    public List<MinesweeperSquareViewModel> Neighbours
+    private List<MinesweeperSquareVM> _neighbours = new();
+    public List<MinesweeperSquareVM> Neighbours
     {
         get => _neighbours;
         set
@@ -103,13 +103,13 @@ public class MinesweeperSquareViewModel : BaseViewModel
 
     #region Constructor
 
-    public MinesweeperSquareViewModel(MinesweeperSquareModel square)
+    public MinesweeperSquareVM(MinesweeperSquareModel square)
     {
         _square = square;
         Initialize();
     }
 
-    public MinesweeperSquareViewModel()
+    public MinesweeperSquareVM()
     {
         _square = new MinesweeperSquareModel();
         Initialize();

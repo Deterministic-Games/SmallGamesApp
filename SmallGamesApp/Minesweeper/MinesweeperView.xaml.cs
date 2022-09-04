@@ -1,19 +1,19 @@
 ﻿using System.Windows.Controls;
-using SmallGamesApp.Core.Minesweeper;
+using SmallGamesApp.Core;
 
-namespace SmallGamesApp.Minesweeper;
+namespace SmallGamesApp;
 
 /// <summary>
 /// Interaction logic for MinesweeperView.xaml
 /// </summary>
 public partial class MinesweeperView : UserControl
 {
-    private MinesweeperBoardViewModel _viewModel;
+    private MinesweeperBoardVM _viewModel;
 
     public MinesweeperView()
     {
         InitializeComponent();
-        _viewModel = new MinesweeperBoardViewModel();
+        _viewModel = new MinesweeperBoardVM();
         DataContext = _viewModel;
     }
 }

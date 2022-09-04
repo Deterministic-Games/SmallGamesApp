@@ -3,7 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 
-namespace SmallGamesApp.MVVMToolkit.Memory;
+namespace SmallGamesApp.MVVMToolkit;
+
 public partial class MemoryBoardVM : ObservableObject
 {
     #region Properties
@@ -51,10 +52,10 @@ public partial class MemoryBoardVM : ObservableObject
     private async void StartNextTurn()
     {
         _sequenceNumber = 0;
-        int i = Random.Shared.Next(4);
+        int i = Random.Shared.Next(Squares.Count);
         _sequence.Add(i);
 
-        await Task.Delay(1);
+        await Task.Delay(500);
 
         foreach (var num in _sequence)
         {

@@ -1,18 +1,17 @@
-﻿<UserControl x:Class="SmallGamesApp.Minesweeper.MinesweeperView"
+﻿<UserControl x:Class="SmallGamesApp.MinesweeperView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SmallGamesApp.Minesweeper"
-             xmlns:root="clr-namespace:SmallGamesApp"
+             xmlns:local="clr-namespace:SmallGamesApp"
              xmlns:controls="clr-namespace:SmallGamesApp.Controls"
-             xmlns:viewmodels="clr-namespace:SmallGamesApp.Core.Minesweeper;assembly=SmallGamesApp.Core"
+             xmlns:viewmodels="clr-namespace:SmallGamesApp.Core;assembly=SmallGamesApp.Core"
              d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperBoardViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="400"
              MinHeight="1" MinWidth="1">
     <UserControl.Resources>
-        <root:InverseBoolConverter x:Key="boolconverter"/>
+        <local:InverseBoolConverter x:Key="boolconverter"/>
         <local:BackgroundConverter x:Key="backgroundconverter"/>
         <local:ForegroundConverter x:Key="foregroundconverter"/>
         <local:RestartImageConverter x:Key="restartimageconverter"/>

@@ -4,7 +4,8 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace SmallGamesApp.Minesweeper;
+namespace SmallGamesApp;
+
 public class MinesweeperSquareImageConverter : IValueConverter
 {
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)

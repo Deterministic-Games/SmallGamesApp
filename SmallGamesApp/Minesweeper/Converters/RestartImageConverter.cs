@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace SmallGamesApp.Minesweeper;
+namespace SmallGamesApp;
 
 public class RestartImageConverter : IMultiValueConverter
 {

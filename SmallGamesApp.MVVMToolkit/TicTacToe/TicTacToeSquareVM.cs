@@ -1,11 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SmallGamesApp.MVVMToolkit;
-using SmallGamesApp.MVVMToolkit.TicTacToe;
 
-namespace SmallGamesApp.Core.TicTacToe;
+namespace SmallGamesApp.MVVMToolkit;
 
-public partial class TicTacToeSquareViewModel : ObservableObject
+public partial class TicTacToeSquareVM : ObservableObject
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsOccupied))]
@@ -20,10 +18,10 @@ public partial class TicTacToeSquareViewModel : ObservableObject
         { SquareState.Player2, SquareState.Player1 }
     };
 
-    public TicTacToeSquareViewModel() { }
+    public TicTacToeSquareVM() { }
 
     [RelayCommand(CanExecute = nameof(IsOccupied))]
-    private void UpdateState(TicTacToeBoardViewModel board)
+    private void UpdateState(TicTacToeBoardVM board)
     {
         var player = board.CurrentPlayer;
         State = player;

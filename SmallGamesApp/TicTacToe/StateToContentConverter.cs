@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using SmallGamesApp.MVVMToolkit;
 
-namespace SmallGamesApp.TicTacToe;
+namespace SmallGamesApp;
 
 public class StateToContentConverter : IValueConverter
 {

@@ -3,7 +3,8 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace SmallGamesApp.Memory;
+namespace SmallGamesApp;
+
 public class PositionToColorConverter : MarkupExtension, IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

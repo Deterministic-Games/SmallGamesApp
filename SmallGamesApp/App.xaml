@@ -2,19 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmallGamesApp"
-             xmlns:minesweepercore="clr-namespace:SmallGamesApp.Core.Minesweeper;assembly=SmallGamesApp.Core"
-             xmlns:minesweeper="clr-namespace:SmallGamesApp.Minesweeper"
-             
-             
-             xmlns:tictactoecore="clr-namespace:SmallGamesApp.MVVMToolkit.TicTacToe;assembly=SmallGamesApp.MVVMToolkit"
-             xmlns:tictactoe="clr-namespace:SmallGamesApp.TicTacToe"
-             
-             xmlns:connectfourcore="clr-namespace:SmallGamesApp.MVVMToolkit.ConnectFour;assembly=SmallGamesApp.MVVMToolkit"
-             xmlns:connectfour="clr-namespace:SmallGamesApp.ConnectFour"
-            
-             xmlns:memorycore="clr-namespace:SmallGamesApp.MVVMToolkit.Memory;assembly=SmallGamesApp.MVVMToolkit"
-             xmlns:memory="clr-namespace:SmallGamesApp.Memory"
-             
+             xmlns:core="clr-namespace:SmallGamesApp.Core;assembly=SmallGamesApp.Core"
+             xmlns:mvvmtoolkit="clr-namespace:SmallGamesApp.MVVMToolkit;assembly=SmallGamesApp.MVVMToolkit"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -25,17 +14,17 @@
             </ResourceDictionary.MergedDictionaries>
             
             <!--#region Game data templates-->
-            <DataTemplate DataType="{x:Type minesweepercore:MinesweeperBoardViewModel}">
-                <minesweeper:MinesweeperView />
+            <DataTemplate DataType="{x:Type core:MinesweeperBoardVM}">
+                <local:MinesweeperView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type tictactoecore:TicTacToeBoardViewModel}">
-                <tictactoe:TicTacToeView />
+            <DataTemplate DataType="{x:Type mvvmtoolkit:TicTacToeBoardVM}">
+                <local:TicTacToeView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type connectfourcore:ConnectFourBoardVM}">
-                <connectfour:ConnectFourView />
+            <DataTemplate DataType="{x:Type mvvmtoolkit:ConnectFourBoardVM}">
+                <local:ConnectFourView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type memorycore:MemoryBoardVM}">
-                <memory:MemoryView />
+            <DataTemplate DataType="{x:Type mvvmtoolkit:MemoryBoardVM}">
+                <local:MemoryView />
             </DataTemplate>
             <!--#endregion-->
 

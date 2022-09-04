@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace SmallGamesApp.Core.Minesweeper;
+namespace SmallGamesApp.Core;
 
-public class MinesweeperBoardViewModel : BaseViewModel
+public class MinesweeperBoardVM : BaseViewModel
 {
     #region Members
 
@@ -62,8 +62,8 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     #region Properties
 
-    private ObservableCollection<MinesweeperSquareViewModel>? _squares;
-    public ObservableCollection<MinesweeperSquareViewModel> Squares
+    private ObservableCollection<MinesweeperSquareVM>? _squares;
+    public ObservableCollection<MinesweeperSquareVM> Squares
     {
         get => _squares!;
         set
@@ -100,7 +100,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     #region Constructor
 
-    public MinesweeperBoardViewModel()
+    public MinesweeperBoardVM()
     {
         var size = MinesweeperBoardSize.Small;
         _minesweeperModel = new(size);
@@ -111,7 +111,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
         Initialize();
     }
 
-    public MinesweeperBoardViewModel(MinesweeperBoardSize size)
+    public MinesweeperBoardVM(MinesweeperBoardSize size)
     {
         _minesweeperModel = new(size);
         Size = size;
@@ -123,7 +123,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
     public void Initialize()
     {
-        Squares = new(_minesweeperModel.GetSquares().Select(sqr => new MinesweeperSquareViewModel(sqr)));
+        Squares = new(_minesweeperModel.GetSquares().Select(sqr => new MinesweeperSquareVM(sqr)));
 
         foreach (var square in Squares)
         {
@@ -143,14 +143,14 @@ public class MinesweeperBoardViewModel : BaseViewModel
     {
         if (obj == null) return;
 
-        var sqr = (MinesweeperSquareViewModel)obj;
+        var sqr = (MinesweeperSquareVM)obj;
 
         if (!sqr.CanChord) return;
 
-        HashSet<MinesweeperSquareViewModel> _visited = new();
+        HashSet<MinesweeperSquareVM> _visited = new();
         Crawl(sqr);
 
-        void Crawl(MinesweeperSquareViewModel current)
+        void Crawl(MinesweeperSquareVM current)
         {
             _ = _visited.Add(current);
             foreach (var neighbour in current.Neighbours.Where(n => n.CanChord && !_visited.Contains(n)/* && n.NeighbourMineCount == 0*/ && !n.IsOpened))
@@ -200,7 +200,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
         }
     }
 
-    private List<MinesweeperSquareViewModel> GetNeighbours(MinesweeperSquareViewModel square)
+    private List<MinesweeperSquareVM> GetNeighbours(MinesweeperSquareVM square)
     {
         int index = Squares.IndexOf(square);
         (int row, int col) = Get2DIndex(index);
@@ -210,7 +210,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
         var rowMoreThanMin = row > 0;
         var rowLessThanMax = row < Height - 1;
 
-        var neighbours = new List<MinesweeperSquareViewModel>();
+        var neighbours = new List<MinesweeperSquareVM>();
 
         if (colMoreThanMin) neighbours.Add(GetSquare(row, col - 1));
 
@@ -230,7 +230,7 @@ public class MinesweeperBoardViewModel : BaseViewModel
 
         return neighbours;
 
-        MinesweeperSquareViewModel GetSquare(int row, int col) => Squares[(row * Width) + col];
+        MinesweeperSquareVM GetSquare(int row, int col) => Squares[(row * Width) + col];
 
         (int, int) Get2DIndex(int index)
         {

@@ -1,5 +1,4 @@
 ﻿using SmallGamesApp.MVVMToolkit;
-using SmallGamesApp.MVVMToolkit.ConnectFour;
 using System;
 using System.Collections.Generic;
 using System.Linq;

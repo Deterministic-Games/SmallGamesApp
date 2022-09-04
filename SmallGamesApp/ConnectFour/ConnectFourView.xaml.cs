@@ -1,7 +1,7 @@
-﻿using SmallGamesApp.MVVMToolkit.ConnectFour;
+﻿using SmallGamesApp.MVVMToolkit;
 using System.Windows.Controls;
 
-namespace SmallGamesApp.ConnectFour;
+namespace SmallGamesApp;
 /// <summary>
 /// Interaction logic for ConnectFourView.xaml
 /// </summary>

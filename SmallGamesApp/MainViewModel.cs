@@ -1,10 +1,7 @@
 ﻿using SmallGamesApp.Core;
-using SmallGamesApp.Core.Minesweeper;
+using SmallGamesApp.MVVMToolkit;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using SmallGamesApp.MVVMToolkit.TicTacToe;
-using SmallGamesApp.MVVMToolkit.ConnectFour;
-using SmallGamesApp.MVVMToolkit.Memory;
 
 namespace SmallGamesApp;
 
@@ -40,8 +37,8 @@ public class MainViewModel : BaseViewModel
     {
         ViewModels = new()
         {
-            new MinesweeperBoardViewModel(),
-            new TicTacToeBoardViewModel(),
+            new MinesweeperBoardVM(),
+            new TicTacToeBoardVM(),
             new ConnectFourBoardVM(),
             new MemoryBoardVM()
         };

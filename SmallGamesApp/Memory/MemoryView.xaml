@@ -1,17 +1,16 @@
-﻿<UserControl x:Class="SmallGamesApp.Memory.MemoryView"
+﻿<UserControl x:Class="SmallGamesApp.MemoryView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SmallGamesApp.Memory"
-             xmlns:root="clr-namespace:SmallGamesApp" 
+             xmlns:local="clr-namespace:SmallGamesApp" 
              xmlns:controls="clr-namespace:SmallGamesApp.Controls"
-             xmlns:viewmodels="clr-namespace:SmallGamesApp.MVVMToolkit.Memory;assembly=SmallGamesApp.MVVMToolkit" 
+             xmlns:viewmodels="clr-namespace:SmallGamesApp.MVVMToolkit;assembly=SmallGamesApp.MVVMToolkit" 
              d:DataContext="{d:DesignInstance Type=viewmodels:MemoryBoardVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <root:InverseBoolConverter x:Key="boolconverter"/>
+        <local:InverseBoolConverter x:Key="boolconverter"/>
     </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->
@@ -23,7 +22,6 @@
 
         <!--#endregion-->
 
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -31,7 +29,6 @@
             </Grid.ColumnDefinitions>
             <controls:CounterControl Counter="{Binding Turn}" Grid.Column="0"/>
         </Grid>
-        
 
         <!--#region Game-->
         <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1" 

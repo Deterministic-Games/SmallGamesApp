@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SmallGamesApp.Core.Minesweeper;
+namespace SmallGamesApp.Core;
 
 public class MinesweeperBoardModel
 {

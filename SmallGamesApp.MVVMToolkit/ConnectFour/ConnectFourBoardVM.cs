@@ -2,7 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
-namespace SmallGamesApp.MVVMToolkit.ConnectFour;
+namespace SmallGamesApp.MVVMToolkit;
+
 public partial class ConnectFourBoardVM : ObservableObject
 {
     #region Properties

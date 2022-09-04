@@ -1,16 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SmallGamesApp.Core.TicTacToe;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
-namespace SmallGamesApp.MVVMToolkit.TicTacToe;
+namespace SmallGamesApp.MVVMToolkit;
 
-public partial class TicTacToeBoardViewModel : ObservableObject
+public partial class TicTacToeBoardVM : ObservableObject
 {
     #region Properties
 
-    public ObservableCollection<TicTacToeSquareViewModel> Squares { get; set; } = new();
+    public ObservableCollection<TicTacToeSquareVM> Squares { get; set; } = new();
 
     [ObservableProperty]
     private SquareState _currentPlayer;
@@ -25,11 +24,11 @@ public partial class TicTacToeBoardViewModel : ObservableObject
 
     #region Constructor
 
-    public TicTacToeBoardViewModel()
+    public TicTacToeBoardVM()
     {
         for (int i = 0; i < 9; i++)
         {
-            Squares.Add(new TicTacToeSquareViewModel());
+            Squares.Add(new TicTacToeSquareVM());
         }
         Initialize();
     }
@@ -55,7 +54,7 @@ public partial class TicTacToeBoardViewModel : ObservableObject
     {
         var array = Squares.ToArray();
 
-        var predicate = (TicTacToeSquareViewModel sqr) => sqr.State == _currentPlayer;
+        var predicate = (TicTacToeSquareVM sqr) => sqr.State == _currentPlayer;
 
         // Check rows
         if (array[..3].All(predicate) || array[3..6].All(predicate) || array[6..9].All(predicate))

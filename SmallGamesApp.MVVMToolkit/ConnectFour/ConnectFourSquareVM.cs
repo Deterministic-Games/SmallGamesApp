@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SmallGamesApp.MVVMToolkit.ConnectFour;
+namespace SmallGamesApp.MVVMToolkit;
 
 public partial class ConnectFourSquareVM : ObservableObject
 {

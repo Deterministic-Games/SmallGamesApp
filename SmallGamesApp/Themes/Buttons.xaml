@@ -69,7 +69,7 @@
                         <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
                             <Setter Property="Effect">
                                 <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="0" Opacity="1" BlurRadius="30"
+                                    <DropShadowEffect ShadowDepth="0" Opacity="1" BlurRadius="50"
                                                       Color="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Background, Converter={root:BrushToColorConverter}}"/>
                                 </Setter.Value>
                             </Setter>

@@ -1,7 +1,7 @@
-﻿using SmallGamesApp.MVVMToolkit.Memory;
+﻿using SmallGamesApp.MVVMToolkit;
 using System.Windows.Controls;
 
-namespace SmallGamesApp.Memory;
+namespace SmallGamesApp;
 /// <summary>
 /// Interaction logic for MemoryView.xaml
 /// </summary>

@@ -1,14 +1,16 @@
-﻿using SmallGamesApp.MVVMToolkit.TicTacToe;
+﻿using SmallGamesApp.MVVMToolkit;
 using System.Windows.Controls;
 
-namespace SmallGamesApp.TicTacToe;
+namespace SmallGamesApp;
+
 public partial class TicTacToeView : UserControl
 {
-    private TicTacToeBoardViewModel _viewModel;
+    private TicTacToeBoardVM _viewModel;
+
     public TicTacToeView()
     {
         InitializeComponent();
-        _viewModel = new TicTacToeBoardViewModel();
+        _viewModel = new TicTacToeBoardVM();
         DataContext = _viewModel;
     }
 }

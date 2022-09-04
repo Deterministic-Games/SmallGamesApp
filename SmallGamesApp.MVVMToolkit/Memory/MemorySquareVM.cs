@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SmallGamesApp.MVVMToolkit.Memory;
+namespace SmallGamesApp.MVVMToolkit;
 
 public partial class MemorySquareVM : ObservableObject
 {
