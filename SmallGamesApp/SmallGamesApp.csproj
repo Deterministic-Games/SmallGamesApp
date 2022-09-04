@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Minesweeper\Controls\CounterControl.xaml">
+    <Page Update="Controls\CounterControl.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="Themes\Colors.xaml">
