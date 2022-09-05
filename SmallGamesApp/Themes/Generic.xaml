@@ -5,6 +5,7 @@
         <Setter Property="Foreground" Value="{StaticResource nord11}"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
+
     <Style x:Key="InfoBox"
            TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{StaticResource nord4}"/>

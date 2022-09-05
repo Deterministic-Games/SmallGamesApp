@@ -66,6 +66,14 @@
             </ItemsControl.ItemTemplate>
             <!--#endregion-->
         </ItemsControl>
+
+        <controls:BoardGameControl Grid.Row="1" Columns="2" DataContext="{Binding Squares}" Visibility="Hidden">
+            <controls:BoardGameControl.DataTemplate>
+                <DataTemplate>
+                    <Button Content="Hi"/>
+                </DataTemplate>
+            </controls:BoardGameControl.DataTemplate>
+        </controls:BoardGameControl>
         <!--#endregion-->
     </Grid>
 </UserControl>
