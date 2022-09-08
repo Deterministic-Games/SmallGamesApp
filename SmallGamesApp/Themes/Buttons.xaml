@@ -31,6 +31,38 @@
     </Style>
     <!--#endregion-->
     
+    <!--#region Minesweeper button style-->
+    <Style x:Key="MinesweeperButton" TargetType="{x:Type Button}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsOpened}" Value="True">
+                <Setter Property="Background" Value="{StaticResource nord3}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsOpened}" Value="False">
+                <Setter Property="Background" Value="{StaticResource nord4}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region TicTacToe button style-->
+    <Style x:Key="TicTacToeButton" TargetType="{x:Type Button}">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{StaticResource nord4}" BorderBrush="{StaticResource nord1}" BorderThickness="1">
+                            <Viewbox>
+                                <TextBlock Foreground="{StaticResource nord0}" 
+                                           Text="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=DataContext.State, Converter={root:StateToContentConverter}}"/>
+                            </Viewbox>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+    <!--#endregion-->
+    
     <!--#region Connect 4 button style-->
     <Style x:Key="ConnectFourButton" TargetType="{x:Type Button}">
         <Style.Setters>
@@ -63,7 +95,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
 
-                    <Border Background="{TemplateBinding Background}"/>
+                    <Border Background="{TemplateBinding Background}" Margin="10"/>
                     
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
@@ -81,6 +113,7 @@
     </Style>
     <!--#endregion-->
 
+    <!--#region Default button-->
     <Style x:Key="DefaultUIButton" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
@@ -105,4 +138,5 @@
         <Setter Property="Foreground" Value="{StaticResource nord11}"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
+    <!--#endregion-->
 </ResourceDictionary>

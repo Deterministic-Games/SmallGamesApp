@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmallGamesApp"
              xmlns:core="clr-namespace:SmallGamesApp.Core;assembly=SmallGamesApp.Core"
+             xmlns:controls="clr-namespace:SmallGamesApp.Controls"
              xmlns:mvvmtoolkit="clr-namespace:SmallGamesApp.MVVMToolkit;assembly=SmallGamesApp.MVVMToolkit"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -25,6 +26,42 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type mvvmtoolkit:MemoryBoardVM}">
                 <local:MemoryView />
+            </DataTemplate>
+            <!--#endregion-->
+            
+            <!--#region Square data templates-->
+            <DataTemplate DataType="{x:Type core:MinesweeperSquareVM}">
+                <Button Style="{StaticResource MinesweeperButton}">
+                    <Image Source="{Binding Image, Converter={local:MinesweeperSquareImageConverter}}"/>
+                    <Button.InputBindings>
+                        <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
+                        <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>
+                        <MouseBinding Gesture="MiddleClick" Command="{Binding Path=ChordCommand}"/>
+                        <MouseBinding Gesture="LeftDoubleClick" 
+                                      Command="{Binding RelativeSource={RelativeSource AncestorType=controls:GameBoardControl}, Path=DataContext.OpenSeveralCommand}" 
+                                      CommandParameter="{Binding}"/>
+                    </Button.InputBindings>
+                </Button>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type mvvmtoolkit:TicTacToeSquareVM}">
+                <Button Command="{Binding UpdateStateCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=controls:GameBoardControl}, Path=DataContext}" 
+                        Style="{StaticResource TicTacToeButton}"/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type mvvmtoolkit:ConnectFourSquareVM}">
+                <Button Command="{Binding RelativeSource={RelativeSource AncestorType=controls:GameBoardControl}, Path=DataContext.PlaceTokenCommand}"
+                        CommandParameter="{Binding}"
+                        Foreground="{Binding State, Converter={local:StateToColorConverter}}" 
+                        Style="{StaticResource ConnectFourButton}"/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type mvvmtoolkit:MemorySquareVM}">
+                <Button Command="{Binding RelativeSource={RelativeSource AncestorType=controls:GameBoardControl}, Path=DataContext.PressSquareCommand}" 
+                        CommandParameter="{Binding}"
+                        Background="{Binding Position, Converter={local:PositionToColorConverter}}"
+                        Style="{StaticResource MemoryButton}"/>
             </DataTemplate>
             <!--#endregion-->
 
