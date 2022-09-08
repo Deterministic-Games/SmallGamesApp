@@ -8,7 +8,8 @@
              xmlns:viewmodels="clr-namespace:SmallGamesApp.MVVMToolkit;assembly=SmallGamesApp.MVVMToolkit" 
              d:DataContext="{d:DesignInstance Type=viewmodels:MemoryBoardVM}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="rootcontrol">
     <UserControl.Resources>
         <local:InverseBoolConverter x:Key="boolconverter"/>
         <local:BoolToVisibilityConverter x:Key="visibilityconverter"/>
@@ -24,7 +25,6 @@
         <!--#endregion-->
 
         <!--#region Info panel-->
-        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -36,7 +36,8 @@
             <controls:CounterControl Counter="{Binding Turn}" Grid.Column="1"/>
         </Grid>
 
-        <Grid Visibility="{Binding IsGameOver, Converter={StaticResource visibilityconverter}}">
+        <Grid Visibility="{Binding IsGameOver, Converter={StaticResource visibilityconverter}}" 
+              Background="{StaticResource nord1}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -49,31 +50,7 @@
         <!--#endregion-->
 
         <!--#region Game-->
-        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="2"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <!--#region Template-->
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="viewmodels:MemorySquareVM">
-                    <Button Command="{Binding ElementName=ItemsControl, Path=DataContext.PressSquareCommand}" 
-                            CommandParameter="{Binding}"
-                            Background="{Binding Position, Converter={local:PositionToColorConverter}}"
-                            Margin="10" Style="{StaticResource MemoryButton}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <!--#endregion-->
-        </ItemsControl>
-
-        <controls:BoardGameControl Grid.Row="1" Columns="2" DataContext="{Binding Squares}" Visibility="Hidden">
-            <controls:BoardGameControl.DataTemplate>
-                <DataTemplate>
-                    <Button Content="Hi"/>
-                </DataTemplate>
-            </controls:BoardGameControl.DataTemplate>
-        </controls:BoardGameControl>
+        <controls:GameBoardControl Grid.Row="1" Columns="2"/>
         <!--#endregion-->
     </Grid>
 </UserControl>

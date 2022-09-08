@@ -2,11 +2,12 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
 namespace SmallGamesApp;
 
-public class MinesweeperSquareImageConverter : IValueConverter
+public class MinesweeperSquareImageConverter : MarkupExtension, IValueConverter
 {
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
@@ -27,4 +28,6 @@ public class MinesweeperSquareImageConverter : IValueConverter
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+
+    public override object ProvideValue(IServiceProvider serviceProvider) => this;
 }

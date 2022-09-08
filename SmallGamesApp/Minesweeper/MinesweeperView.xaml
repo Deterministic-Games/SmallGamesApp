@@ -6,10 +6,9 @@
              xmlns:local="clr-namespace:SmallGamesApp"
              xmlns:controls="clr-namespace:SmallGamesApp.Controls"
              xmlns:viewmodels="clr-namespace:SmallGamesApp.Core;assembly=SmallGamesApp.Core"
-             d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperBoardViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:MinesweeperBoardVM}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400"
-             MinHeight="1" MinWidth="1">
+             d:DesignHeight="450" d:DesignWidth="400">
     <UserControl.Resources>
         <local:InverseBoolConverter x:Key="boolconverter"/>
         <local:BackgroundConverter x:Key="backgroundconverter"/>
@@ -24,6 +23,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--#endregion-->
+        
         <!--#region Info panel-->
         <Grid Grid.Row="0" MaxHeight="100" Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
@@ -53,44 +53,9 @@
                                Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
         <!--#endregion-->
+        
         <!--#region Minesweeper-->
-        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1"
-                      IsHitTestVisible="{Binding HasLost, Converter={StaticResource boolconverter}}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="{Binding ElementName=ItemsControl, Path=DataContext.Height}" 
-                                 Columns="{Binding ElementName=ItemsControl, Path=DataContext.Width}"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <!--#region Template-->
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="viewmodels:SquareViewModel">
-                    <Button x:Name="SquareButton">
-                        <Image Source="{Binding Image, Converter={StaticResource squareimageconverter}}"/>
-                        <Button.InputBindings>
-                            <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
-                            <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>
-                            <MouseBinding Gesture="MiddleClick" Command="{Binding Path=ChordCommand}"/>
-                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ElementName=ItemsControl, Path=DataContext.OpenSeveralCommand}" 
-                                          CommandParameter="{Binding}"/>
-                        </Button.InputBindings>
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsOpened}" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource nord3}"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsOpened}" Value="False">
-                                        <Setter Property="Background" Value="{StaticResource nord4}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <!--#endregion-->
-        </ItemsControl>
+        <controls:GameBoardControl Columns="{Binding Width}" Rows="{Binding Height}" Grid.Row="1" />
         <!--#endregion-->
     </Grid>
 </UserControl>

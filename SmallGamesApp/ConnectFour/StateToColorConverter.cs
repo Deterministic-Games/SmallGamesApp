@@ -2,9 +2,10 @@
 using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace SmallGamesApp;
-internal class StateToColorConverter : IValueConverter
+internal class StateToColorConverter : MarkupExtension, IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
@@ -19,4 +20,6 @@ internal class StateToColorConverter : IValueConverter
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+
+    public override object ProvideValue(IServiceProvider serviceProvider) => this;
 }

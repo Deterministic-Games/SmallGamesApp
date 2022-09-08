@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SmallGamesApp"
              xmlns:controls="clr-namespace:SmallGamesApp.Controls"
              xmlns:viewmodels="clr-namespace:SmallGamesApp.MVVMToolkit;assembly=SmallGamesApp.MVVMToolkit"
-             d:DataContext="{d:DesignInstance Type=viewmodels:TicTacToeBoardViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TicTacToeBoardVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -16,46 +16,19 @@
     </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->
-
         <Grid.RowDefinitions>
             <RowDefinition Height=".15*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
         <!--#endregion-->
 
         <!--#region Info panel-->
-
         <controls:TwoPlayerInfoPanel RestartCommand="{Binding RestartCommand}" IsGameOver="{Binding IsGameOver}"
                                      CurrentPlayer="{Binding CurrentPlayer}" Winner="{Binding Winner}"/>
-
         <!--#endregion-->
 
         <!--#region Game-->
-        <ItemsControl ItemsSource="{Binding Squares}" x:Name="ItemsControl" Grid.Row="1" 
-                      IsHitTestVisible="{Binding IsGameOver, Converter={StaticResource boolconverter}}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="3" Columns="3"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <!--#region Template-->
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="viewmodels:TicTacToeSquareViewModel">
-                    <Button Command="{Binding UpdateStateCommand}" x:Name="SquareButton"
-                            CommandParameter="{Binding ElementName=ItemsControl, Path=DataContext}" 
-                            Background="{StaticResource nord4}" Foreground="{StaticResource nord0}">
-                        <Button.Content>
-                            <Viewbox>
-                                <TextBlock Text="{Binding State, Converter={StaticResource stateconverter}}"/>
-                            </Viewbox>
-                        </Button.Content>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <!--#endregion-->
-        </ItemsControl>
-
+        <controls:GameBoardControl Columns="3" Rows="3" Grid.Row="1" IsHitTestVisible="{Binding IsGameOver, Converter={local:InverseBoolConverter}}"/>
         <!--#endregion-->
     </Grid>
 </UserControl>
