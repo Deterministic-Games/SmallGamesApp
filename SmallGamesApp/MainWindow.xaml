@@ -17,15 +17,16 @@
         <!--#endregion-->
         
         <!--#region Game view-->
-        <Border Grid.Column="1" Background="{StaticResource nord1}">
-            <ContentControl Content="{Binding CurrentView}" Margin="10"/>
+        <Border Grid.Column="1" Background="{StaticResource nord1}" BorderThickness="0" SnapsToDevicePixels="True">
+            <ContentControl Content="{Binding CurrentView}" Margin="10" BorderThickness="0" SnapsToDevicePixels="True"/>
         </Border>
         <!--#endregion-->
         
         <!--#region Navigation sidebar-->
-        <StackPanel Background="{StaticResource nord0}">
+        <StackPanel Background="{StaticResource nord0}" SnapsToDevicePixels="True">
             <RadioButton Style="{StaticResource GameListButton}" Content="Minesweeper" 
-                         Command="{Binding ChangeGameCommand}" CommandParameter="0" IsChecked="True"/>
+                         Command="{Binding ChangeGameCommand}" CommandParameter="0" 
+                         IsChecked="True"/>
             <RadioButton Style="{StaticResource GameListButton}" Content="Tic Tac Toe"
                          Command="{Binding ChangeGameCommand}" CommandParameter="1"/>
             <RadioButton Style="{StaticResource GameListButton}" Content="Connect 4"

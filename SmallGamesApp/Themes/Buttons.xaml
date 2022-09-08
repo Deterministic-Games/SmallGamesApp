@@ -7,25 +7,25 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" MaxHeight="100" MinHeight="50">
+                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                              Background="{TemplateBinding Background}" 
+                              MaxHeight="100" MinHeight="50"
+                              SnapsToDevicePixels="True">
                             <Viewbox>
-                                <TextBlock Text="{TemplateBinding Property=Content}" VerticalAlignment="Center" Margin="20 0 30 0" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{TemplateBinding Property=Content}" 
+                                           VerticalAlignment="Center" Margin="20 0 30 0" HorizontalAlignment="Left"
+                                           Foreground="{StaticResource nord10}"/>
                             </Viewbox>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{StaticResource nord0}"/>
         </Style.Setters>
 
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="{StaticResource nord1}"/>
-            </Trigger>
-            <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Background" Value="{StaticResource nord0}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -41,6 +41,7 @@
                 <Setter Property="Background" Value="{StaticResource nord4}"/>
             </DataTrigger>
         </Style.Triggers>
+        <Setter Property="BorderBrush" Value="{StaticResource nord3}"/>
     </Style>
     <!--#endregion-->
     
@@ -69,7 +70,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Background="{StaticResource nord4}">
+                        <Grid Background="{StaticResource nord4}" SnapsToDevicePixels="True">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width=".1*"/>
                                 <ColumnDefinition Width="*"/>

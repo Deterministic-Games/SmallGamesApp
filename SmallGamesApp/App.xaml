@@ -16,22 +16,22 @@
             
             <!--#region Game data templates-->
             <DataTemplate DataType="{x:Type core:MinesweeperBoardVM}">
-                <local:MinesweeperView />
+                <local:MinesweeperView Margin="10"/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type mvvmtoolkit:TicTacToeBoardVM}">
-                <local:TicTacToeView />
+                <local:TicTacToeView Margin="10"/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type mvvmtoolkit:ConnectFourBoardVM}">
-                <local:ConnectFourView />
+                <local:ConnectFourView Margin="10"/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type mvvmtoolkit:MemoryBoardVM}">
-                <local:MemoryView />
+                <local:MemoryView/>
             </DataTemplate>
             <!--#endregion-->
             
             <!--#region Square data templates-->
             <DataTemplate DataType="{x:Type core:MinesweeperSquareVM}">
-                <Button Style="{StaticResource MinesweeperButton}">
+                <Button Style="{StaticResource MinesweeperButton}" SnapsToDevicePixels="True">
                     <Image Source="{Binding Image, Converter={local:MinesweeperSquareImageConverter}}"/>
                     <Button.InputBindings>
                         <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>

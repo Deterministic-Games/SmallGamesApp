@@ -9,11 +9,6 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:TicTacToeBoardVM}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <local:StateToContentConverter x:Key="stateconverter"/>
-        <local:BoolToVisibilityConverter x:Key="visibilityconverter"/>
-        <local:InverseBoolConverter x:Key="boolconverter"/>
-    </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->
         <Grid.RowDefinitions>
