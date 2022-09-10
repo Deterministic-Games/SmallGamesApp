@@ -46,7 +46,9 @@
         <!--#endregion-->
 
         <!--#region Game-->
-        <controls:GameBoardControl Grid.Row="1" Columns="2"/>
+        <controls:GameBoardControl Grid.Row="1" Columns="2" 
+                                   IsEnabled="{Binding IsGameOver, Converter={local:InverseBoolConverter}}"
+                                   IsHitTestVisible="{Binding IsNotShowingSequence}"/>
         <!--#endregion-->
     </Grid>
 </UserControl>

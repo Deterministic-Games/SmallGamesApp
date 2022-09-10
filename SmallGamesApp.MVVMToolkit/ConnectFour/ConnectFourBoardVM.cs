@@ -4,33 +4,8 @@ using System.Collections.ObjectModel;
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class ConnectFourBoardVM : ObservableObject
+public partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSquareVM>
 {
-    #region Properties
-
-    public ObservableCollection<ConnectFourSquareVM> Squares { get; set; } = new();
-
-	[ObservableProperty]
-	private SquareState _currentPlayer;
-
-	[ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsGameOver))]
-	private SquareState _winner;
-
-    public bool IsGameOver => _winner != SquareState.Empty;
-
-    #endregion
-
-    #region Members
-
-    private static readonly IDictionary<SquareState, SquareState> s_playerMap = new Dictionary<SquareState, SquareState>
-	{
-		{ SquareState.Player1, SquareState.Player2 },
-		{ SquareState.Player2, SquareState.Player1 }
-	};
-
-    #endregion
-
     #region Constructor
 
     public ConnectFourBoardVM()
@@ -45,7 +20,7 @@ public partial class ConnectFourBoardVM : ObservableObject
         Initialize();
 	}
 
-    private void Initialize()
+    protected override void Initialize()
     {
         foreach (var square in Squares)
         {
@@ -70,17 +45,14 @@ public partial class ConnectFourBoardVM : ObservableObject
 
             if (square.IsAvailable)
 			{
-				square.State = _currentPlayer;
+				square.State = CurrentPlayer;
                 CheckForWin(square);
 
-                CurrentPlayer = s_playerMap[_currentPlayer];
+                CurrentPlayer = PlayerSwitchMap[CurrentPlayer];
 				break;
 			}
 		}
 	}
-
-    [RelayCommand]
-    private void Restart() => Initialize();
 
     #endregion
 
@@ -93,16 +65,16 @@ public partial class ConnectFourBoardVM : ObservableObject
 
 		if (CheckRowForWin(row, col)) // Check row
         {
-			Winner = _currentPlayer;
+			Winner = CurrentPlayer;
 		}
         else if (CheckDiagonals(row, col)) // Check diagonals
         {
-            Winner = _currentPlayer;
+            Winner = CurrentPlayer;
         }
         else if (row <= 2) // Check column
 		{
             if (CheckColumnForWin(row, col))
-                Winner = _currentPlayer;
+                Winner = CurrentPlayer;
         }
     }
 
@@ -113,7 +85,7 @@ public partial class ConnectFourBoardVM : ObservableObject
 
 		for (int i = StartIndex; i <= maxIndex; i += 7)
 		{
-			if (Squares[i].State != _currentPlayer) return false;
+			if (Squares[i].State != CurrentPlayer) return false;
 		}
         return true;
 	}
@@ -135,7 +107,7 @@ public partial class ConnectFourBoardVM : ObservableObject
             if (i == index)
                 continue;
 
-            connected = Squares[i].State == _currentPlayer ? connected + 1 : 0;
+            connected = Squares[i].State == CurrentPlayer ? connected + 1 : 0;
 
             if (connected >= 3)
 				return true;
@@ -181,7 +153,7 @@ public partial class ConnectFourBoardVM : ObservableObject
 
         for (int i = index - offset; i >= minIndex; i -= offset)
         {
-            if (Squares[i].State != _currentPlayer)
+            if (Squares[i].State != CurrentPlayer)
                 break;
             connected++;
         }
@@ -200,7 +172,7 @@ public partial class ConnectFourBoardVM : ObservableObject
 
         for (int i = index + offset; i <= maxIndex; i += offset)
         {
-            if (Squares[i].State != _currentPlayer)
+            if (Squares[i].State != CurrentPlayer)
                 break;
             connected++;
         }

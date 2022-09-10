@@ -5,23 +5,8 @@ using System.Diagnostics;
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class TicTacToeBoardVM : ObservableObject
+public partial class TicTacToeBoardVM : TwoPlayerBoardVM<TicTacToeSquareVM>
 {
-    #region Properties
-
-    public ObservableCollection<TicTacToeSquareVM> Squares { get; set; } = new();
-
-    [ObservableProperty]
-    private SquareState _currentPlayer;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsGameOver))]
-    private SquareState _winner;
-
-    public bool IsGameOver => _winner != SquareState.Empty;
-
-    #endregion
-
     #region Constructor
 
     public TicTacToeBoardVM()
@@ -33,7 +18,7 @@ public partial class TicTacToeBoardVM : ObservableObject
         Initialize();
     }
 
-    private void Initialize()
+    protected override void Initialize()
     {
         foreach (var square in Squares)
         {
@@ -47,38 +32,34 @@ public partial class TicTacToeBoardVM : ObservableObject
 
     #region Private methods
 
-    [RelayCommand]
-    private void Restart() => Initialize();
-
     public void CheckForWin()
     {
         var array = Squares.ToArray();
 
-        var predicate = (TicTacToeSquareVM sqr) => sqr.State == _currentPlayer;
+        var player = CurrentPlayer;
+
+        var predicate = (TicTacToeSquareVM sqr) => sqr.State == player;
 
         // Check rows
         if (array[..3].All(predicate) || array[3..6].All(predicate) || array[6..9].All(predicate))
-            Winner = _currentPlayer;
+            Winner = player;
 
         // Check columns
         for (int col = 0; col < 3; col++)
         {
-            if (array[col].State == _currentPlayer && array[col + 3].State == _currentPlayer && array[col + 6].State == _currentPlayer)
-            {
-                Debug.WriteLine("hheh");
-                Winner = _currentPlayer;
-            }
+            if (array[col].State == player && array[col + 3].State == player && array[col + 6].State == player)
+                Winner = player;
         }
 
         // Check diagonals
-        if (array[4].State != _currentPlayer)
+        if (array[4].State != player)
             return;
 
-        if (array[0].State == _currentPlayer && array[8].State == _currentPlayer)
-            Winner = _currentPlayer;
+        if (array[0].State == player && array[8].State == player)
+            Winner = player;
 
-        if (array[2].State == _currentPlayer && array[6].State == _currentPlayer)
-            Winner = _currentPlayer;
+        if (array[2].State == player && array[6].State == player)
+            Winner = player;
     }
 
     #endregion

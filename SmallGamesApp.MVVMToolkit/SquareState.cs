@@ -2,7 +2,7 @@
 
 public enum SquareState
 {
-    Empty,
-    Player1,
-    Player2,
+    Empty = 0,
+    Player1 = 1,
+    Player2 = 2,
 }

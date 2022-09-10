@@ -12,12 +12,6 @@ public partial class TicTacToeSquareVM : ObservableObject
 
     public bool IsOccupied => _state == SquareState.Empty;
 
-    private static readonly IDictionary<SquareState, SquareState> s_playerMap = new Dictionary<SquareState, SquareState>
-    {
-        { SquareState.Player1, SquareState.Player2 },
-        { SquareState.Player2, SquareState.Player1 }
-    };
-
     public TicTacToeSquareVM() { }
 
     [RelayCommand(CanExecute = nameof(IsOccupied))]
@@ -26,6 +20,7 @@ public partial class TicTacToeSquareVM : ObservableObject
         var player = board.CurrentPlayer;
         State = player;
         board.CheckForWin();
-        board.CurrentPlayer = s_playerMap[board.CurrentPlayer];
+        board.CurrentPlayer = TwoPlayerBoardVM<object>.PlayerSwitchMap[board.CurrentPlayer];
+
     }
 }

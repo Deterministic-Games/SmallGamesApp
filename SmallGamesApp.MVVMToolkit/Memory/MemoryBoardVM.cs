@@ -5,11 +5,9 @@ using System.Runtime.CompilerServices;
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class MemoryBoardVM : ObservableObject
+public partial class MemoryBoardVM : BaseBoardVM<MemorySquareVM>
 {
     #region Properties
-
-    public ObservableCollection<MemorySquareVM> Squares { get; } = new();
 
     private int _turn;
     public int Turn
@@ -51,9 +49,21 @@ public partial class MemoryBoardVM : ObservableObject
     public MemoryBoardVM()
     {
         for (int i = 0; i < 4; i++)
-        {
             Squares.Add(new() { Position = i });
+        
+        Initialize();
+    }
+
+    protected override void Initialize()
+    {
+        if (_sequence.Count > 0)
+        {
+            _sequence.Clear();
+
+            while (Squares.Count > 4)
+                Squares.RemoveAt(4);
         }
+        IsGameOver = false;
         Turn = 1;
     }
 
@@ -99,18 +109,5 @@ public partial class MemoryBoardVM : ObservableObject
             Turn++;
         else
             _sequenceNumber++;
-    }
-
-    [RelayCommand]
-    private void Restart()
-    {
-        _sequence.Clear();
-
-        while (Squares.Count > 4)
-        {
-            Squares.RemoveAt(4);
-        }
-        IsGameOver = false;
-        Turn = 1;
     }
 }
