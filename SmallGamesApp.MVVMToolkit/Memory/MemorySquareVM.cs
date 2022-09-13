@@ -2,7 +2,7 @@
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class MemorySquareVM : ObservableObject
+public sealed partial class MemorySquareVM : ObservableObject
 {
     [ObservableProperty]
     private bool _isHighlighted;

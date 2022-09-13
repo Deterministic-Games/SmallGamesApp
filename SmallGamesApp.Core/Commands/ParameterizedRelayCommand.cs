@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace SmallGamesApp.Core;
 
-public class ParameterizedRelayCommand : ICommand
+public sealed class ParameterizedRelayCommand : ICommand
 {
     [Required]
     private readonly Action<object> _action;
@@ -23,10 +23,6 @@ public class ParameterizedRelayCommand : ICommand
     }
 
     public event EventHandler? CanExecuteChanged;
-    /*{
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
-    }*/
 
     public bool CanExecute(object? parameter) => _predicate();
 

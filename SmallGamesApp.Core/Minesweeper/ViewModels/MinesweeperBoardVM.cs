@@ -3,11 +3,10 @@ using System.Windows.Input;
 
 namespace SmallGamesApp.Core;
 
-public class MinesweeperBoardVM : BaseViewModel
+public sealed class MinesweeperBoardVM : BaseViewModel
 {
     #region Members
 
-    //private readonly DispatcherTimer _timer = new() { Interval = new TimeSpan(0, 0, 1) };
     private Timer? _timer;
     private TimerCallback _timerCallback;
 
@@ -90,8 +89,8 @@ public class MinesweeperBoardVM : BaseViewModel
 
     #region Commands
 
-    private ICommand? _openCommand;
-    public ICommand OpenSeveralCommand => _openCommand ??= new ParameterizedRelayCommand(OpenSeveral);
+    private ICommand? _openSeveralCommand;
+    public ICommand OpenSeveralCommand => _openSeveralCommand ??= new ParameterizedRelayCommand(OpenSeveral);
 
     private ICommand? _restartCommand;
     public ICommand RestartCommand => _restartCommand ??= new RelayCommand(Restart);
@@ -161,7 +160,7 @@ public class MinesweeperBoardVM : BaseViewModel
         }
     }
 
-    public void Restart()
+    private void Restart()
     {
         _timer!.Dispose();
         _minesweeperModel.Restart();

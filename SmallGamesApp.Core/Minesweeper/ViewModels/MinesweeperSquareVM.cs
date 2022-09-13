@@ -2,12 +2,12 @@
 
 namespace SmallGamesApp.Core;
 
-public class MinesweeperSquareVM : BaseViewModel
+public sealed class MinesweeperSquareVM : BaseViewModel
 {
     #region Members
 
-    public event EventHandler OpenEvent;
-    public event EventHandler FlagEvent;
+    public event EventHandler? OpenEvent;
+    public event EventHandler? FlagEvent;
 
     #endregion
 
@@ -31,8 +31,6 @@ public class MinesweeperSquareVM : BaseViewModel
         {
             _square.IsFlagged = value;
             OnPropertyChanged();
-            //OnPropertyChanged("CanOpen");
-            //OnPropertyChanged("CanFlag");
             OnPropertyChanged("Image");
         }
     }
@@ -46,8 +44,6 @@ public class MinesweeperSquareVM : BaseViewModel
 
             _square.IsOpened = value;
             OnPropertyChanged();
-            //OnPropertyChanged("CanOpen");
-            //OnPropertyChanged("CanFlag");
             OnPropertyChanged("Image");
         }
     }
@@ -95,9 +91,14 @@ public class MinesweeperSquareVM : BaseViewModel
 
     #region Commands
 
-    public ICommand OpenCommand { get; set; }
-    public ICommand FlagCommand { get; set; }
-    public ICommand ChordCommand { get; set; }
+    private ICommand? _openCommand;
+    public ICommand OpenCommand => _openCommand ??= new RelayCommand(Open, () => CanOpen);
+
+    private ICommand? _flagCommand;
+    public ICommand FlagCommand => _flagCommand ??= new RelayCommand(ToggleFlag, () => CanFlag);
+
+    private ICommand? _chordCommand;
+    public ICommand ChordCommand => _chordCommand ??= new RelayCommand(Chord, () => CanChord);
 
     #endregion
 
@@ -106,20 +107,6 @@ public class MinesweeperSquareVM : BaseViewModel
     public MinesweeperSquareVM(MinesweeperSquareModel square)
     {
         _square = square;
-        Initialize();
-    }
-
-    public MinesweeperSquareVM()
-    {
-        _square = new MinesweeperSquareModel();
-        Initialize();
-    }
-
-    private void Initialize()
-    {
-        OpenCommand = new RelayCommand(Open, () => CanOpen);
-        FlagCommand = new RelayCommand(ToggleFlag, () => CanFlag);
-        ChordCommand = new RelayCommand(Chord, () => CanChord);
     }
 
     #endregion
@@ -141,5 +128,4 @@ public class MinesweeperSquareVM : BaseViewModel
     public void Chord() => _neighbours.FindAll(n => !n.IsFlagged).ForEach(n => n.Open());
 
     #endregion
-
 }

@@ -1,11 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class MemoryBoardVM : BaseBoardVM<MemorySquareVM>
+public sealed partial class MemoryBoardVM : BaseBoardVM<MemorySquareVM>
 {
     #region Properties
 

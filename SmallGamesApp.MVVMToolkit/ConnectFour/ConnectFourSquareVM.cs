@@ -2,7 +2,7 @@
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class ConnectFourSquareVM : ObservableObject
+public sealed partial class ConnectFourSquareVM : ObservableObject
 {
     #region Properties
 

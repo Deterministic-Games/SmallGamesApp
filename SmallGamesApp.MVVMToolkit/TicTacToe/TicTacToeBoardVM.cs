@@ -1,11 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿namespace SmallGamesApp.MVVMToolkit;
 
-namespace SmallGamesApp.MVVMToolkit;
-
-public partial class TicTacToeBoardVM : TwoPlayerBoardVM<TicTacToeSquareVM>
+public sealed partial class TicTacToeBoardVM : TwoPlayerBoardVM<TicTacToeSquareVM>
 {
     #region Constructor
 

@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class TicTacToeSquareVM : ObservableObject
+public sealed partial class TicTacToeSquareVM : ObservableObject
 {
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsOccupied))]
