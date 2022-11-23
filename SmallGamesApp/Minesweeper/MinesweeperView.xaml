@@ -11,6 +11,20 @@
              d:DesignHeight="450" d:DesignWidth="400">
     <UserControl.Resources>
         <local:RestartImageConverter x:Key="restartimageconverter"/>
+
+        <DataTemplate DataType="{x:Type viewmodels:MinesweeperSquareVM}">
+            <Button Style="{StaticResource MinesweeperButton}" SnapsToDevicePixels="True">
+                <Image Source="{Binding Image, Converter={local:MinesweeperSquareImageConverter}}"/>
+                <Button.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding Path=OpenCommand}"/>
+                    <MouseBinding Gesture="RightClick" Command="{Binding Path=FlagCommand}"/>
+                    <MouseBinding Gesture="MiddleClick" Command="{Binding Path=ChordCommand}"/>
+                    <MouseBinding Gesture="LeftDoubleClick" 
+                                      Command="{Binding RelativeSource={RelativeSource AncestorType=controls:GameBoardControl}, Path=DataContext.OpenSeveralCommand}" 
+                                      CommandParameter="{Binding}"/>
+                </Button.InputBindings>
+            </Button>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->

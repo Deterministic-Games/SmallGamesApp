@@ -40,7 +40,8 @@ public class MainViewModel : BaseViewModel
             new MinesweeperBoardVM(),
             new TicTacToeBoardVM(),
             new ConnectFourBoardVM(),
-            new MemoryBoardVM()
+            new MemoryBoardVM(),
+            new SodukoBoardVM()
         };
         CurrentView = ViewModels[0];
     }

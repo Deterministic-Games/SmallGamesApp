@@ -10,6 +10,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              x:Name="rootcontrol">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:MemorySquareVM}">
+            <Button Command="{Binding RelativeSource={RelativeSource AncestorType=controls:GameBoardControl}, Path=DataContext.PressSquareCommand}" 
+                        CommandParameter="{Binding}"
+                        Background="{Binding Position, Converter={local:PositionToColorConverter}}"
+                        Style="{StaticResource MemoryButton}"/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <!--#region Definitions-->
 
