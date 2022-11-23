@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace SmallGamesApp.Core;
 
-public class RelayCommand : ICommand
+public sealed class RelayCommand : ICommand
 {
     [Required]
     private readonly Action _action;
@@ -23,10 +23,6 @@ public class RelayCommand : ICommand
     }
 
     public event EventHandler? CanExecuteChanged;
-    /*{
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
-    }*/
 
     public bool CanExecute(object? parameter)
     {

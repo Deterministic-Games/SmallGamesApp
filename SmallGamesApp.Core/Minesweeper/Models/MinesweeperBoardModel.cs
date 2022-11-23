@@ -2,7 +2,7 @@
 
 namespace SmallGamesApp.Core;
 
-public class MinesweeperBoardModel
+internal sealed class MinesweeperBoardModel
 {
     #region Members
 

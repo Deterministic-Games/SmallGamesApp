@@ -1,6 +1,6 @@
 ﻿namespace SmallGamesApp.Core;
 
-public class MinesweeperSquareModel
+public sealed class MinesweeperSquareModel
 {
     #region Properties
 

@@ -1,10 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.Input;
 
 namespace SmallGamesApp.MVVMToolkit;
 
-public partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSquareVM>
+public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSquareVM>
 {
     #region Constructor
 
