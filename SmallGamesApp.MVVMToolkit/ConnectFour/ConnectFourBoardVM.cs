@@ -1,16 +1,24 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace SmallGamesApp.MVVMToolkit;
 
 public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSquareVM>
 {
+    #region Private properties
+
+    private const int BoardRows = 6;
+    private const int BoardColumns = 7;
+
+    #endregion
+
     #region Constructor
 
     public ConnectFourBoardVM()
 	{
-        for (int row = 0; row < 6; row++)
+        for (int row = 0; row < BoardRows; row++)
         {
-            for (int col = 0; col < 7; col++)
+            for (int col = 0; col < BoardColumns; col++)
             {
                 Squares.Add(new(col, row));
             }
@@ -37,7 +45,7 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
 	{
 		int col = sqr.Column;
 
-		for (int r = 5; r >= 0; r--)
+		for (int r = BoardRows - 1; r >= 0; r--)
 		{
 			var square = Squares[FlattenIndex(r, col)];
 
@@ -61,19 +69,12 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
 		int row = nSquare.Row;
 		int col = nSquare.Column;
 
-		if (CheckRowForWin(row, col)) // Check row
+		if (CheckRowForWin(row, col) || CheckDiagonals(row, col) || 
+            (row <= 2 && CheckColumnForWin(row, col))
+        )
         {
 			Winner = CurrentPlayer;
 		}
-        else if (CheckDiagonals(row, col)) // Check diagonals
-        {
-            Winner = CurrentPlayer;
-        }
-        else if (row <= 2) // Check column
-		{
-            if (CheckColumnForWin(row, col))
-                Winner = CurrentPlayer;
-        }
     }
 
 	private bool CheckColumnForWin(int row, int col)
@@ -81,7 +82,7 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
 		int StartIndex = FlattenIndex(row + 1, col);
 		int maxIndex = FlattenIndex(row + 3, col);
 
-		for (int i = StartIndex; i <= maxIndex; i += 7)
+		for (int i = StartIndex; i <= maxIndex; i += BoardColumns)
 		{
 			if (Squares[i].State != CurrentPlayer) return false;
 		}
@@ -115,23 +116,16 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
 
 	private bool CheckDiagonals(int row, int col)
 	{
-        int index = FlattenIndex(row, col);
-
-        int rowsDown = Math.Min(3, 5 - row);
-        int rowsUp = Math.Min(3, row);
-        int rowsLeft = Math.Min(3, col);
-        int rowsRight = Math.Min(3, 6 - col);
-
 		// Upper left <-> lower right
-		int upperLeft = UpwardDiagonalConnected(rowsUp, rowsLeft, 8, index);
-		int lowerRight = DownwardDiagonalConnected(rowsDown, rowsRight, 8, index);
+		int upperLeft = DiagonalConnected(row, col, -1, -1);
+        int lowerRight = DiagonalConnected(row, col, 1, 1);
 
         if (upperLeft + lowerRight >= 3)
             return true;
 
 		// Lower left <-> upper right
-		int lowerLeft = DownwardDiagonalConnected(rowsDown, rowsLeft, 6, index);
-		int upperRight = UpwardDiagonalConnected(rowsUp, rowsRight, 6, index);
+		int lowerLeft = DiagonalConnected(row, col, 1, -1);
+        int upperRight = DiagonalConnected(row, col, -1, 1);
 
         if (lowerLeft + upperRight >= 3)
             return true;
@@ -139,46 +133,46 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
         return false;
     }
 
-	public int UpwardDiagonalConnected(int rows, int cols, int offset, int index)
-	{
-        int connected = 0;
-        int maxOffset = Math.Min(rows, cols);
-
-        if (maxOffset == 0)
-            return 0;
-
-        int minIndex = index - (maxOffset * offset);
-
-        for (int i = index - offset; i >= minIndex; i -= offset)
-        {
-            if (Squares[i].State != CurrentPlayer)
-                break;
-            connected++;
-        }
-        return connected;
-    }
-
-    public int DownwardDiagonalConnected(int rows, int cols, int offset, int index)
+    private int DiagonalConnected(int row, int col, int rowDirection, int colDirection)
     {
         int connected = 0;
-        int maxOffset = Math.Min(rows, cols);
+        int currentRow = row + rowDirection;
+        int currentCol = col + colDirection;
 
-        if (maxOffset == 0)
-            return 0;
-
-        int maxIndex = index + (maxOffset * offset);
-
-        for (int i = index + offset; i <= maxIndex; i += offset)
+        while (currentRow >= 0 && currentRow <= BoardRows - 1 && currentCol >= 0 && currentCol <= BoardColumns - 1)
         {
-            if (Squares[i].State != CurrentPlayer)
+            int index = FlattenIndex(currentRow, currentCol);
+
+            if (Squares[index].State == CurrentPlayer)
+            {
+                connected++;
+            }
+            else
+            {
                 break;
-            connected++;
+            }
+
+            currentRow += rowDirection;
+            currentCol += colDirection;
         }
+
         return connected;
     }
 
 
-    private int FlattenIndex(int row, int col) => (row * 7) + col;
+    private int FlattenIndex(int row, int col) => (row * BoardColumns) + col;
+
+    public ConnectFourBoardVM Copy()
+    {
+        return new ConnectFourBoardVM
+        {
+            CurrentPlayer = CurrentPlayer,
+            Squares =
+            new ObservableCollection<ConnectFourSquareVM>(
+                Squares.Select(s => new ConnectFourSquareVM(s.Column, s.Row) { State = s.State })
+            )
+        };
+    }
 
     #endregion
 }
