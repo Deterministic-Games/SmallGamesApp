@@ -1,14 +1,18 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace SmallGamesApp.MVVMToolkit;
 
 public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSquareVM>
 {
-    #region Private properties
+    #region Public properties
 
-    private const int BoardRows = 6;
-    private const int BoardColumns = 7;
+    public const int BoardRows = 6;
+    public const int BoardColumns = 7;
+
+    [ObservableProperty]
+    private bool _isAITurn = false;
 
     #endregion
 
@@ -41,9 +45,11 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
     #region Commands
 
     [RelayCommand]
-	private void PlaceToken(ConnectFourSquareVM sqr)
+	private async void PlaceToken(ConnectFourSquareVM sqr)
 	{
 		int col = sqr.Column;
+
+        bool tokenPlaced = false;
 
 		for (int r = BoardRows - 1; r >= 0; r--)
 		{
@@ -55,14 +61,28 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
                 CheckForWin(square);
 
                 CurrentPlayer = PlayerSwitchMap[CurrentPlayer];
+                tokenPlaced = true;
 				break;
 			}
 		}
+
+        if (tokenPlaced && Winner == SquareState.Empty)
+        {
+            IsAITurn = true;
+            await MakeAIMove();
+            IsAITurn = false;
+        }
 	}
 
     #endregion
 
     #region Private methods
+
+    private async Task MakeAIMove()
+    {
+        int bestMove = await ConnectFourAI.GetBestMoveAsync(this, 4);
+        TryPlaceTokenOnColumn(bestMove);
+    }
 
     private void CheckForWin(ConnectFourSquareVM nSquare)
 	{
@@ -160,7 +180,7 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
     }
 
 
-    private int FlattenIndex(int row, int col) => (row * BoardColumns) + col;
+    public int FlattenIndex(int row, int col) => (row * BoardColumns) + col;
 
     public ConnectFourBoardVM Copy()
     {
@@ -172,6 +192,29 @@ public sealed partial class ConnectFourBoardVM : TwoPlayerBoardVM<ConnectFourSqu
                 Squares.Select(s => new ConnectFourSquareVM(s.Column, s.Row) { State = s.State })
             )
         };
+    }
+
+    #endregion
+
+    #region Public methods
+
+    public bool TryPlaceTokenOnColumn(int col)
+    {
+        for (int r = BoardRows - 1; r >= 0; r--)
+        {
+            var square = Squares[FlattenIndex(r, col)];
+
+            if (square.IsAvailable)
+            {
+                square.State = CurrentPlayer;
+                CheckForWin(square);
+
+                CurrentPlayer = PlayerSwitchMap[CurrentPlayer];
+
+                return true;
+            }
+        }
+        return false;
     }
 
     #endregion

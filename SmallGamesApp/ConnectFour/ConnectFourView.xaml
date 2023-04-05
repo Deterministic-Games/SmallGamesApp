@@ -31,8 +31,14 @@
         <!--#endregion-->
 
         <!--#region Game-->
-        <controls:GameBoardControl Columns="7" Rows="6" Grid.Row="1" 
-                                   IsHitTestVisible="{Binding IsGameOver, Converter={local:InverseBoolConverter}}"/>
+        <controls:GameBoardControl Columns="7" Rows="6" Grid.Row="1">
+            <controls:GameBoardControl.IsHitTestVisible>
+                <MultiBinding Converter="{local:CanInteractWithBoardConverter}">
+                    <Binding Path="IsGameOver"/>
+                    <Binding Path="IsAITurn"/>
+                </MultiBinding>
+            </controls:GameBoardControl.IsHitTestVisible>
+        </controls:GameBoardControl>
         <!--#endregion-->
     </Grid>
 </UserControl>
