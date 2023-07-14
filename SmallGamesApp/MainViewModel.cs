@@ -41,7 +41,8 @@ public class MainViewModel : BaseViewModel
             new TicTacToeBoardVM(),
             new ConnectFourBoardVM(),
             new MemoryBoardVM(),
-            new SodukoBoardVM()
+            new SodukoBoardVM(),
+            new GameOfLifeVM()
         };
         CurrentView = ViewModels[0];
     }
