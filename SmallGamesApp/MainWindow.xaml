@@ -35,6 +35,8 @@
                          Command="{Binding ChangeGameCommand}" CommandParameter="3"/>
             <RadioButton Style="{StaticResource GameListButton}" Content="Soduko"
                          Command="{Binding ChangeGameCommand}" CommandParameter="4"/>
+            <RadioButton Style="{StaticResource GameListButton}" Content="Game Of Life"
+                         Command="{Binding ChangeGameCommand}" CommandParameter="5"/>
         </StackPanel>
         <!--#endregion-->
     </Grid>
